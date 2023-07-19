@@ -1,6 +1,6 @@
-# Coffee Chino ![Coffee Chino Logo](./assests/images/logo.svg)
+# Coffee Shop Coffe Chino Website
 
-## Coffee Shop Website
+## ![Coffee Chino Logo](./assests/images/logo.svg)
 
 ### Links
 
