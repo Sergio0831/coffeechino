@@ -1,7 +1,11 @@
 {
 	"name": "coffeechino",
 	"version": "1.0.0",
-	"description": "coffeechino",
+	"description": "Coffee Shop Cofee Chino Website",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Sergio0831/coffeechino"
+	},
 	"main": "app.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"

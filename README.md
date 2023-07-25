@@ -1,4 +1,4 @@
-# Coffee Shop Coffe Chino Website
+# Coffee Shop Coffee Chino Website
 
 ## ![Coffee Chino Logo](./assests/images/logo.svg)
 
