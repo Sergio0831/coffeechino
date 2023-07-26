@@ -1,19 +1,31 @@
 'use strict';
 
-window.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
 	(function () {
 		// Variables
 		const navBtn = document?.querySelector('.nav__hamburger');
 		const navMenu = document?.querySelector('.nav');
+		const navLinks = document?.querySelectorAll('.nav__item a');
 		const bodyEl = document.body;
 
 		// Functions
+
+		// Disable scroll when menu is open
+		const disableScroll = () => {
+			bodyEl.classList.add('dis-scroll');
+		};
+
+		// Enable scroll when menu is closed
+		const enableScroll = () => {
+			bodyEl.classList.remove('dis-scroll');
+		};
+
 		const openMenu = () => {
 			navBtn?.classList.add('burger--active');
 			navMenu?.classList.add('nav--active');
 			navBtn?.setAttribute('aria-expanded', 'true');
 			navBtn?.setAttribute('aria-label', 'Close menu');
-			bodyEl.classList.add('dis-scroll');
+			disableScroll();
 		};
 
 		const closeMenu = () => {
@@ -21,7 +33,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 			navMenu?.classList.remove('nav--active');
 			navBtn?.setAttribute('aria-expanded', 'false');
 			navBtn?.setAttribute('aria-label', 'Open menu');
-			bodyEl.classList.remove('dis-scroll');
+			enableScroll();
 		};
 
 		// Event Listeners
@@ -37,11 +49,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
 			}
 		});
 
-		// Event listener to close the menu when clicking outside
+		// Event listener to close the menu when clicked outside
 		document.addEventListener('click', (event) => {
 			if (!navMenu?.contains(event.target) && event.target !== navBtn) {
 				closeMenu();
 			}
+		});
+
+		// Event listener to close the menu when menu link is clicked
+		navLinks?.forEach((link) => {
+			link.addEventListener('click', (event) => {
+				event.stopPropagation();
+				closeMenu();
+			});
 		});
 	})();
 });
