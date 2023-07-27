@@ -51,6 +51,10 @@
 
 	/* Effects */
 	--image-shadow: 0 1.25rem 2.5rem 0 rgba(35, 25, 23, 0.15);
+
+	/* Border radius */
+	--radius-small: 5px;
+	--radius-base: 0.5rem;
 }
 
 /* Reset styles */
@@ -76,7 +80,8 @@ img,
 picture {
 	display: block;
 	max-width: 100%;
-	height: auto;
+	height: 100%;
+	object-fit: cover;
 }
 
 input,
@@ -142,6 +147,7 @@ h2 {
 .heading-1 {
 	font-size: 2.2rem;
 	line-height: 140%;
+	color: var(--light-color);
 }
 
 .heading-2 {
@@ -171,7 +177,7 @@ h2 {
 	background-color: transparent;
 	border: 2px solid var(--accent-color);
 	padding: 0.5em 1em;
-	border-radius: 5px;
+	border-radius: var(--radius-small);
 }
 
 .btn__transparent:hover,
@@ -222,10 +228,6 @@ header {
 }
 
 /* Text on video top styles */
-.header__content {
-	color: var(--light-color);
-}
-
 .header__content h1 {
 	max-width: 30.375rem;
 	margin-bottom: 1.875rem;
@@ -236,7 +238,7 @@ header {
 	position: absolute;
 	right: 0;
 	left: 0;
-	top: 5rem;
+	top: 5.125rem;
 	transform: scale(0.5);
 	opacity: 0;
 	pointer-events: none;
@@ -272,7 +274,7 @@ header {
 	font-weight: var(--fw-semibold);
 	font-size: 1.4rem;
 	padding: 0.5em 1em;
-	border-radius: 5px;
+	border-radius: var(--radius-small);
 	transition: color var(--transition-base),
 		background-color var(--transition-base);
 }
@@ -354,12 +356,34 @@ header {
 }
 
 .about__images img {
-	border-radius: 0.5rem;
+	border-radius: var(--radius-base);
 	box-shadow: var(--image-shadow);
 }
 
 .about__images picture:first-child {
 	margin-bottom: 1.75rem;
+}
+
+/* Banner styles */
+.banner {
+	background-color: var(--dark-color);
+	border-radius: var(--radius-base);
+	box-shadow: var(--image-shadow);
+	overflow: hidden;
+}
+
+.banner__heading {
+	padding: 1rem 1rem 2rem;
+	max-width: 18.75rem;
+	text-transform: capitalize;
+}
+
+.banner__heading span {
+	color: var(--accent-color);
+}
+
+.banner__img img {
+	width: 100%;
 }
 
 /* Tablet styles min-width 460px */
@@ -383,6 +407,11 @@ header {
 
 	.about__images picture:first-child {
 		margin-bottom: 0;
+	}
+
+	/* Banner styles */
+	.banner__heading {
+		max-width: 100%;
 	}
 }
 
@@ -427,8 +456,6 @@ header {
 	}
 
 	.about__images img {
-		height: 100%;
-		object-fit: cover;
 		transition: transform var(--transition-base), outline var(--transition-base);
 		will-change: transform, outline;
 		outline-offset: 0.5rem;
@@ -445,6 +472,20 @@ header {
 
 	.about__images--img2 {
 		z-index: 2;
+	}
+
+	/* Banner styles */
+	.banner {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.banner__heading {
+		padding: 2.5rem 0 2.5rem 3.75rem;
+	}
+
+	.banner__img {
+		clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
 	}
 }
 

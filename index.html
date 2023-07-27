@@ -18,7 +18,7 @@
 
 <body>
     <!-- Header start -->
-    <header>
+    <header id="home">
         <div class="container header__nav">
             <img src="assests/images/logo.svg" alt="Logo" width="228" height="35">
             <!-- Main navigation start -->
@@ -58,7 +58,7 @@
     <main>
         <div class="container">
             <!-- About Us start -->
-            <section class="about">
+            <section id="about" class="about">
                 <div class="about__content">
                     <h2 class="heading-2 section-heading">About Us</h2>
                     <p>We opened our award-winning Coffee Chino Cafe in 2016. We are opened 7 days a week. At Coffee
@@ -94,33 +94,52 @@
             <!-- About Us end-->
             <!-- Banner start -->
             <section>
-                <h2 class="heading-2 section-heading">About Us</h2>
+                <div class="banner">
+                    <h2 class="heading-1 banner__heading"><span>Make</span> your day <span>great</span> with our
+                        <span>coffee!</span>
+                    </h2>
+                    <div class="banner__img">
+                        <picture>
+                            <source type="image/avif" media="(max-width: 28.75rem)"
+                                srcset="assests/images/banner/banner-mobile.avif">
+                            <source type="image/avif" media="(max-width: 51.52rem)"
+                                srcset="assests/images/banner/banner-tablet.avif">
+                            <source type="image/avif" srcset="assests/images/banner/banner-desktop.avif">
+                            <source type="image/webp" media="(max-width: 28.75rem)"
+                                srcset="assests/images/banner/banner-mobile.webp">
+                            <source type="image/webp" media="(max-width: 51.52rem)"
+                                srcset="assests/images/banner/banner-tablet.webp">
+                            <img loading="lazy" src="assests/images/banner/banner-desktop.webp" class="image"
+                                width="400" height="300" alt="Make coffee">
+                        </picture>
+                    </div>
+
+                </div>
             </section>
             <!-- Banner end-->
             <!-- Menu start -->
-            <section>
+            <section id="menu">
                 <h2 class="heading-2 section-heading">Our Menu</h2>
             </section>
             <!-- Menu end-->
             <!-- Gallery start -->
-            <section>
+            <section id="gallery">
                 <h2 class="heading-2 section-heading">Gallery</h2>
             </section>
             <!-- Gallery end-->
             <!-- Testimonials start -->
-            <section>
+            <section id="testimonials">
                 <h2 class="heading-2 section-heading">Testimonials</h2>
             </section>
             <!-- Testimonials end-->
             <!-- Contact Us start -->
-            <section>
+            <section id="contact">
                 <h2 class="heading-2 section-heading">Contact Us</h2>
             </section>
             <!-- Contact Us end-->
         </div>
     </main>
     <!-- Main end -->
-
     <!-- Footer Us start -->
     <footer></footer>
     <!-- Footer Us end-->
