@@ -48,7 +48,7 @@
                 <h1 class="heading-1">
                     Crafted with Care, Brewed for You: Discover the Difference
                 </h1>
-                <a href="#menu" class="btn btn__transparent btn__transparent-light">Our Menu</a>
+                <a href="#menu" class="btn btn__outline btn__outline--light">Our Menu</a>
             </div>
         </div>
         <!-- Video end -->
@@ -58,7 +58,7 @@
     <main>
         <div class="container">
             <!-- About Us start -->
-            <section id="about" class="about">
+            <section id="about" class="section about">
                 <div class="about__content">
                     <h2 class="heading-2 section-heading">About Us</h2>
                     <p>We opened our award-winning Coffee Chino Cafe in 2016. We are opened 7 days a week. At Coffee
@@ -76,7 +76,7 @@
                         pleasures of
                         life.
                         Visit us and enjoy real coffee and tasty food.</p>
-                    <a href="#contact" class="btn btn__transparent btn__transparent-dark">Our Location</a>
+                    <a href="#contact" class="btn btn__outline btn__outline--dark">Our Location</a>
                 </div>
                 <div class="about__images">
                     <picture>
@@ -93,7 +93,7 @@
             </section>
             <!-- About Us end-->
             <!-- Banner start -->
-            <section>
+            <section class="section">
                 <div class="banner">
                     <h2 class="heading-1 banner__heading"><span>Make</span> your day <span>great</span> with our
                         <span>coffee!</span>
@@ -113,35 +113,112 @@
                                 width="400" height="300" alt="Make coffee">
                         </picture>
                     </div>
-
                 </div>
             </section>
             <!-- Banner end-->
             <!-- Menu start -->
-            <section id="menu">
-                <h2 class="heading-2 section-heading">Our Menu</h2>
+            <section id="menu" class="section menu">
+                <div class="menu__wrapper">
+                    <h2 class="heading-2 section-heading">Our Menu</h2>
+                    <div class="menu__btns center-y">
+                        <button id="drinks" class="btn btn__transparent btn--active">Drinks</button>
+                        <div class="separator"></div>
+                        <button id="food" class="btn btn__transparent">Food</button>
+                    </div>
+                    <div class="menu__card"></div>
+                </div>
             </section>
             <!-- Menu end-->
             <!-- Gallery start -->
-            <section id="gallery">
+            <section id="gallery" class="section">
                 <h2 class="heading-2 section-heading">Gallery</h2>
             </section>
             <!-- Gallery end-->
             <!-- Testimonials start -->
-            <section id="testimonials">
+            <section id="testimonials" class="section">
                 <h2 class="heading-2 section-heading">Testimonials</h2>
             </section>
             <!-- Testimonials end-->
             <!-- Contact Us start -->
-            <section id="contact">
+            <section id="contact" class="section contact">
                 <h2 class="heading-2 section-heading">Contact Us</h2>
+                <div class="contact__content">
+                    <h3 class="heading-4">Send Us a Message</h3>
+                    <p>We would love to hear from you! Whether you have a question, a suggestion, or simply want to
+                        share your experience with
+                        us, please don't hesitate to send us a message.</p>
+                </div>
             </section>
             <!-- Contact Us end-->
         </div>
     </main>
     <!-- Main end -->
     <!-- Footer Us start -->
-    <footer></footer>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <!-- Opening Hours section start -->
+                <section class="footer__section">
+                    <h3 class="heading-4">Opening Hours</h3>
+                    <p>Monday - Thursday: 8:30 - 20:30</p>
+                    <p>Friday &amp; Saturday: 8:30 - 22:00</p>
+                    <p>Sunday: 9:30 - 20:30</p>
+                </section>
+                <!-- Opening Hours section end -->
+                <!-- Contact section start -->
+                <section class="footer__section">
+                    <h3 class="heading-4">Contact Us</h3>
+                    <p>44 Main Street</p>
+                    <p>Dublin 1, Ireland</p>
+                    <p><span>Tel: </span><a href="tel:01-353-4242">01-353-4242</a></p>
+                    <p><span>Email: </span><a href="mailto:coffeechino@gmail.com"> coffeechino@gmail.com</a></p>
+                </section>
+                <!-- Contact section end -->
+                <!-- Follow Us section start -->
+                <section class="footer__section">
+                    <h3 class="heading-4">Follow Us</h3>
+                    <p>Stay connected with us and join
+                        our vibrant online community!</p>
+                    <!-- Socials start -->
+                    <ul class="social">
+                        <li class="social__item"><a href="https://www.facebook.com/" target="_blank"
+                                class="social__link" aria-label="Our Facebook Page"><svg class="social__link-icon"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19 0H5a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5V5a5 5 0 00-5-5zm-3 7h-1.924C13.461 7 13 7.252 13 7.889V9h3l-.238 3H13v8h-3v-8H8V9h2V7.077C10 5.055 11.064 4 13.461 4H16v3z" />
+                                </svg></a></li>
+                        <li class="social__item"><a href="https://www.linkedin.com/" target="_blank"
+                                class="social__link" aria-label="Our LinkedIn Page"><svg class="social__link-icon"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19 0H5a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5V5a5 5 0 00-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z" />
+                                </svg></a></li>
+                        <li class="social__item"><a href="https://www.twitter.com/" target="_blank" class="social__link"
+                                aria-label="Our Twitter Page">
+                                <svg class="social__link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19 0H5a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5V5a5 5 0 00-5-5zm-.139 9.237c.209 4.617-3.234 9.765-9.33 9.765a9.286 9.286 0 01-5.032-1.475 6.605 6.605 0 004.86-1.359 3.285 3.285 0 01-3.066-2.28 3.3 3.3 0 001.482-.056c-1.579-.317-2.668-1.739-2.633-3.26.442.246.949.394 1.486.411A3.289 3.289 0 015.612 6.6a9.32 9.32 0 006.766 3.43 3.286 3.286 0 015.594-2.993 6.583 6.583 0 002.086-.796 3.296 3.296 0 01-1.443 1.816A6.578 6.578 0 0020.5 7.54a6.66 6.66 0 01-1.639 1.697z" />
+                                </svg>
+                            </a></li>
+                        <li class="social__item"><a href="https://www.instagram.com/" target="_blank"
+                                class="social__link" aria-label="Our instagram Page">
+                                <svg class="social__link-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M15.233 5.488c-.843-.038-1.097-.046-3.233-.046s-2.389.008-3.232.046c-2.17.099-3.181 1.127-3.279 3.279-.039.844-.048 1.097-.048 3.233s.009 2.389.047 3.233c.099 2.148 1.106 3.18 3.279 3.279.843.038 1.097.047 3.233.047 2.137 0 2.39-.008 3.233-.046 2.17-.099 3.18-1.129 3.279-3.279.038-.844.046-1.097.046-3.233s-.008-2.389-.046-3.232c-.099-2.153-1.111-3.182-3.279-3.281zM12 16.108a4.108 4.108 0 110-8.215 4.108 4.108 0 010 8.215zm4.271-7.418a.96.96 0 110-1.92.96.96 0 010 1.92zM14.667 12a2.667 2.667 0 11-5.334 0 2.667 2.667 0 015.334 0zM19 0H5a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5V5a5 5 0 00-5-5zm.952 15.298c-.132 2.909-1.751 4.521-4.653 4.654-.854.039-1.126.048-3.299.048s-2.444-.009-3.298-.048c-2.908-.133-4.52-1.748-4.654-4.654C4.009 14.445 4 14.173 4 12c0-2.172.009-2.445.048-3.298.134-2.908 1.748-4.521 4.654-4.653C9.556 4.009 9.827 4 12 4s2.445.009 3.299.048c2.908.133 4.523 1.751 4.653 4.653.039.854.048 1.127.048 3.299 0 2.173-.009 2.445-.048 3.298z" />
+                                </svg>
+                            </a></li>
+                    </ul>
+                    <!-- Socials start -->
+                </section>
+                <!-- Follow Us section end -->
+            </div>
+            <div class="footer__copy center-y">
+                <p>&copy;2023 Coffee Chino</p>
+                <div class="separator--small"></div>
+                <p>All Rights reserved</p>
+            </div>
+        </div>
+    </footer>
     <!-- Footer Us end-->
 </body>
 
