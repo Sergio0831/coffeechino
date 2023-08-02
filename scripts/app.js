@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		const navBtn = document?.querySelector('.nav__hamburger');
 		const navMenu = document?.querySelector('.nav');
 		const navLinks = document?.querySelectorAll('.nav__item a');
+		const scrollBtns = document?.querySelectorAll(
+			'a[href="#menu"], a[href="#contact"]',
+		);
 		const bodyEl = document.body;
 
 		/***** Functions *****/
@@ -44,6 +47,57 @@ document.addEventListener('DOMContentLoaded', () => {
 			toggleScroll();
 		};
 
+		// Scroll to element on link click
+		const scrolToElementOnClick = (event, element, offset = 0) => {
+			event.preventDefault();
+
+			const target = element.getAttribute('href');
+			const targetElement = document.querySelector(target);
+			const top = targetElement.offsetTop;
+
+			window.scrollTo({
+				top: top - offset,
+				behavior: 'smooth',
+			});
+		};
+
+		// Set the active link in the navigation menu
+		const setActiveLink = (link) => {
+			const activeLinks = document.querySelectorAll('nav li.active-link');
+			activeLinks.forEach((activeLink) => {
+				if (activeLink !== link) {
+					// Remove focus from the previous active link
+					activeLink.querySelector('a').blur();
+				}
+				activeLink.classList.remove('active-link');
+			});
+
+			link.classList.add('active-link');
+		};
+
+		// Update the active navigation menu link on scro20
+		const handleScroll = () => {
+			const sections = document.querySelectorAll('section, header');
+			const scrollPosition = window.scrollY;
+
+			let activeLink = null;
+
+			sections.forEach((section) => {
+				const sectionTop = section.offsetTop;
+				const sectionBottom = sectionTop + section.offsetHeight;
+
+				if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+					activeLink = document.querySelector(
+						`nav li a[href='#${section.id}']`,
+					);
+				}
+			});
+
+			if (activeLink) {
+				setActiveLink(activeLink.parentElement);
+			}
+		};
+
 		/***** Event Listeners *****/
 
 		// Event listener to open, close menu
@@ -59,13 +113,28 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		});
 
-		// Event listener to close the menu when menu link is clicked
+		// Event listener to scroll to section and close the menu when menu link is clicked
 		navLinks?.forEach((link) => {
 			link.addEventListener('click', (event) => {
 				event.stopPropagation();
 				closeMenu();
+				scrolToElementOnClick(event, link, 30);
+
+				setActiveLink(link.parentElement);
 			});
 		});
+
+		// Event listener to scroll to particular section on button clicked
+		scrollBtns?.forEach((btn) => {
+			btn.addEventListener('click', (event) => {
+				event.stopPropagation();
+				btn.blur();
+				scrolToElementOnClick(event, btn, 30);
+			});
+		});
+
+		// Event listener to attach the scroll event to the window
+		window.addEventListener('scroll', handleScroll);
 	})();
 
 	/***** Function for drinks and food menu *****/
@@ -188,16 +257,16 @@ document.addEventListener('DOMContentLoaded', () => {
 			const { name, description, price } = categoryData;
 
 			const html = `
-		<div class='category__item'>
-			<div class='category__item-content'>
-				<h4 class='heading-4'>${name}</h4>
-				<p>${description}</p>
-			</div>	
-			<div class='category__item-prices'>
-				${price.map((item) => `<span>&euro;${item.toFixed(2)}</span>`).join(' ')}
-			</div>
-		</div>
-		`;
+				<div class='category__item'>
+					<div class='category__item-content'>
+						<h4 class='heading-4'>${name}</h4>
+						<p>${description}</p>
+					</div>	
+					<div class='category__item-prices'>
+						${price.map((item) => `<span>&euro;${item.toFixed(2)}</span>`).join(' ')}
+					</div>
+				</div>
+			`;
 			return html;
 		};
 
