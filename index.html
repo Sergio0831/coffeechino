@@ -23,7 +23,7 @@
             <img src="assests/images/logo.svg" alt="Logo" width="228" height="35">
             <!-- Main navigation start -->
             <nav class="nav">
-                <ul class="nav__list">
+                <ul class="nav__list text-center">
                     <li class="nav__item active-link"><a href="#home">Home</a></li>
                     <li class="nav__item"><a href="#about">About Us</a></li>
                     <li class="nav__item"><a href="#menu">Our Menu</a></li>
@@ -56,101 +56,128 @@
     <!-- Header end -->
     <!-- Main start -->
     <main>
-        <div class="container">
-            <!-- About Us start -->
-            <section id="about" class="section about">
-                <div class="about__content">
+        <!-- About Us start -->
+        <section id="about" class="about section container">
+            <div class="about__content">
+                <div class="text-center">
                     <h2 class="heading-2 section-heading">About Us</h2>
-                    <p>We opened our award-winning Coffee Chino Cafe in 2016. We are opened 7 days a week. At Coffee
-                        Chino you
-                        will find
-                        cosy
-                        atmosphere, and whether you're seeking a quiet corner to catch up on work, meeting a friend for
-                        a chat,
-                        or simply
-                        looking for a space to relax, our coffee shop provides the ideal setting. With warm lighting,
-                        comfortable seating,
-                        and a
-                        friendly ambiance, we strive to create a haven where you can unwind, connect, and enjoy the
-                        simple
-                        pleasures of
-                        life.
-                        Visit us and enjoy real coffee and tasty food.</p>
-                    <a href="#contact" class="btn btn__outline btn__outline--dark">Our Location</a>
                 </div>
-                <div class="about__images">
+                <p>We opened our award-winning Coffee Chino Cafe in 2016. We are opened 7 days a week. At Coffee
+                    Chino you
+                    will find
+                    cosy
+                    atmosphere, and whether you're seeking a quiet corner to catch up on work, meeting a friend for
+                    a chat,
+                    or simply
+                    looking for a space to relax, our coffee shop provides the ideal setting. With warm lighting,
+                    comfortable seating,
+                    and a
+                    friendly ambiance, we strive to create a haven where you can unwind, connect, and enjoy the
+                    simple
+                    pleasures of
+                    life.
+                    Visit us and enjoy real coffee and tasty food.</p>
+                <a href="#contact" class="btn btn__outline btn__outline--dark">Our Location</a>
+            </div>
+            <div class="about__images">
+                <picture>
+                    <source srcset="assests/images/about/about-us-1.avif" type="image/avif">
+                    <img loading="lazy" src="assests/images/about/about-us-1.webp" class="about__images--img1"
+                        width="480" height="320" alt="Three person holding beverage cups">
+                </picture>
+                <picture>
+                    <source srcset="assests/images/about/about-us-2.avif" type="image/avif">
+                    <img loading="lazy" src="assests/images/about/about-us-2.webp" class="about__images--img2"
+                        width="480" height="320" alt="Coffee Shop">
+                </picture>
+            </div>
+        </section>
+        <!-- About Us end-->
+        <!-- Banner start -->
+        <section class="section container">
+            <div class="banner even-columns">
+                <h2 class="heading-1 banner__heading"><span>Make</span> your day <span>great</span> with our
+                    <span>coffee!</span>
+                </h2>
+                <div class="banner__img">
                     <picture>
-                        <source srcset="assests/images/about/about-us-1.avif" type="image/avif">
-                        <img loading="lazy" src="assests/images/about/about-us-1.webp" class="about__images--img1"
-                            width="480" height="320" alt="Three person holding beverage cups">
-                    </picture>
-                    <picture>
-                        <source srcset="assests/images/about/about-us-2.avif" type="image/avif">
-                        <img loading="lazy" src="assests/images/about/about-us-2.webp" class="about__images--img2"
-                            width="480" height="320" alt="Coffee Shop">
+                        <source type="image/avif" media="(max-width: 28.75rem)"
+                            srcset="assests/images/banner/banner-mobile.avif">
+                        <source type="image/avif" media="(max-width: 51.52rem)"
+                            srcset="assests/images/banner/banner-tablet.avif">
+                        <source type="image/avif" srcset="assests/images/banner/banner-desktop.avif">
+                        <source type="image/webp" media="(max-width: 28.75rem)"
+                            srcset="assests/images/banner/banner-mobile.webp">
+                        <source type="image/webp" media="(max-width: 51.52rem)"
+                            srcset="assests/images/banner/banner-tablet.webp">
+                        <img loading="lazy" src="assests/images/banner/banner-desktop.webp" class="image" width="400"
+                            height="300" alt="Make coffee">
                     </picture>
                 </div>
-            </section>
-            <!-- About Us end-->
-            <!-- Banner start -->
-            <section class="section">
-                <div class="banner">
-                    <h2 class="heading-1 banner__heading"><span>Make</span> your day <span>great</span> with our
-                        <span>coffee!</span>
-                    </h2>
-                    <div class="banner__img">
-                        <picture>
-                            <source type="image/avif" media="(max-width: 28.75rem)"
-                                srcset="assests/images/banner/banner-mobile.avif">
-                            <source type="image/avif" media="(max-width: 51.52rem)"
-                                srcset="assests/images/banner/banner-tablet.avif">
-                            <source type="image/avif" srcset="assests/images/banner/banner-desktop.avif">
-                            <source type="image/webp" media="(max-width: 28.75rem)"
-                                srcset="assests/images/banner/banner-mobile.webp">
-                            <source type="image/webp" media="(max-width: 51.52rem)"
-                                srcset="assests/images/banner/banner-tablet.webp">
-                            <img loading="lazy" src="assests/images/banner/banner-desktop.webp" class="image"
-                                width="400" height="300" alt="Make coffee">
-                        </picture>
-                    </div>
-                </div>
-            </section>
-            <!-- Banner end-->
-            <!-- Menu start -->
-            <section id="menu" class="section menu">
-                <div class="menu__wrapper">
+            </div>
+        </section>
+        <!-- Banner end-->
+        <!-- Menu start -->
+        <section id="menu" class="menu section">
+            <div class="menu__wrapper container">
+                <div class="text-center">
                     <h2 class="heading-2 section-heading">Our Menu</h2>
-                    <div class="menu__btns center-y">
-                        <button id="drinks" class="btn btn__transparent btn--active">Drinks</button>
-                        <div class="separator"></div>
-                        <button id="food" class="btn btn__transparent">Food</button>
-                    </div>
-                    <div class="menu__card"></div>
                 </div>
-            </section>
-            <!-- Menu end-->
-            <!-- Gallery start -->
-            <section id="gallery" class="section">
+                <div class="menu__btns center-y">
+                    <button aria-label="Drinks" class="btn btn__transparent menu__btn btn--active">Drinks</button>
+                    <div class="separator"></div>
+                    <button aria-label="Food" class="btn btn__transparent menu__btn">Food</button>
+                </div>
+                <div class="menu__card"></div>
+            </div>
+        </section>
+        <!-- Menu end-->
+        <!-- Gallery start -->
+        <section id="gallery" class="section container">
+            <div class="text-center">
                 <h2 class="heading-2 section-heading">Gallery</h2>
-            </section>
-            <!-- Gallery end-->
-            <!-- Testimonials start -->
-            <section id="testimonials" class="section">
+            </div>
+        </section>
+        <!-- Gallery end-->
+        <!-- Testimonials start -->
+        <section id="testimonials" class="section container">
+            <div class="text-center">
                 <h2 class="heading-2 section-heading">Testimonials</h2>
-            </section>
-            <!-- Testimonials end-->
-            <!-- Contact Us start -->
-            <section id="contact" class="section contact">
+            </div>
+        </section>
+        <!-- Testimonials end-->
+        <!-- Contact Us start -->
+        <section id="contact" class="contact section container">
+            <div class="text-center">
                 <h2 class="heading-2 section-heading">Contact Us</h2>
+            </div>
+            <div class="even-columns">
                 <div class="contact__content">
-                    <h3 class="heading-4">Send Us a Message</h3>
+                    <h3 class="heading-4">Send us a message</h3>
                     <p>We would love to hear from you! Whether you have a question, a suggestion, or simply want to
                         share your experience with
                         us, please don't hesitate to send us a message.</p>
+                    <!-- Contact Us contact form start -->
+                    <form action="" class="contact__form">
+                        <input type="text" aria-label="Name" placeholder="Enter your name" class="contact__form-input">
+                        <input type="email" aria-label="email" placeholder="Enter your email"
+                            class="contact__form-input">
+                        <textarea aria-label="Message" cols="30" rows="10" placeholder="Enter your message"
+                            class="contact__form-input"></textarea>
+                        <button type="submit" class="btn btn__block btn__outline btn__outline--dark">Send a
+                            message</button>
+                    </form>
+                    <!-- Contact Us contact form end -->
                 </div>
-            </section>
-            <!-- Contact Us end-->
-        </div>
+                <!-- Contact Us map start -->
+                <iframe class="contact__map"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2378.893270903644!2d-6.2921868230100575!3d53.39884907079341!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48670dc475e5c117%3A0x7baa038425845b41!2sFinglas%20Training%20Centre%20CDETB!5e0!3m2!1sen!2sie!4v1690715761286!5m2!1sen!2sie"
+                    width="400" height="500" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <!-- Contact Us map end -->
+            </div>
+        </section>
+        <!-- Contact Us end-->
     </main>
     <!-- Main end -->
     <!-- Footer Us start -->
