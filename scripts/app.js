@@ -1,9 +1,10 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
-	/***** Function for navigation menu and links *****/
+	/***** Navigation menu and links *****/
 	(function () {
 		/***** Variables *****/
+
 		const navBtn = document?.querySelector('.nav__hamburger');
 		const navMenu = document?.querySelector('.nav');
 		const navLinks = document?.querySelectorAll('.nav__item a');
@@ -118,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			link.addEventListener('click', (event) => {
 				event.stopPropagation();
 				closeMenu();
-				scrolToElementOnClick(event, link, 30);
+				scrolToElementOnClick(event, link, 50);
 
 				setActiveLink(link.parentElement);
 			});
@@ -129,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			btn.addEventListener('click', (event) => {
 				event.stopPropagation();
 				btn.blur();
-				scrolToElementOnClick(event, btn, 30);
+				scrolToElementOnClick(event, btn, 50);
 			});
 		});
 
@@ -137,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		window.addEventListener('scroll', handleScroll);
 	})();
 
-	/***** Function for drinks and food menu *****/
+	/***** Drinks and food menu *****/
 	(function () {
 		/***** Variables *****/
 		const menuBtns = document.querySelectorAll('.menu__btn');
@@ -349,5 +350,98 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		/***** Event listeners *****/
 		menuBtns.forEach((btn) => btn.addEventListener('click', showMenuOnClick));
+	})();
+
+	/***** Testimonials *****/
+	(function () {
+		/***** Variables *****/
+		const testimonialsSlider = document?.querySelector('.splide');
+
+		/* Testimonials data */
+		const testimonialsData = [
+			{
+				image: '../assests/images/testimonials/erik.webp',
+				name: 'Erik Lamela',
+				review:
+					"I can't say enough about the exceptional service at Coffee Chino. The staff is incredibly friendly, knowledgeable, and passionate. They always go the extra mile to ensure I have a memorable experience. It's the kind of place that makes you feel like a valued customer.",
+			},
+			{
+				image: '../assests/images/testimonials/sarah.webp',
+				name: 'Sarah Marie',
+				review:
+					'The combination of delicious food and incredible coffee at Coffee Chino is unbeatable. From their mouth watering pastries to their expertly crafted lattes, every visit is a delightful experience. It has become my favourite spot to indulge in a moment of pure bliss.',
+			},
+			{
+				image: '../assests/images/testimonials/john.webp',
+				name: 'John Lee',
+				review:
+					"I'm a coffee enthusiast, and I must say, Coffee Chino has impressed me with their dedication to quality. The attention to detail in their brewing process and the rich, aromatic flavours of their coffee are unparalleled. It's a true haven for coffee lovers.",
+			},
+			{
+				image: '../assests/images/testimonials/emily.webp',
+				name: 'Emily Walsh',
+				review:
+					'The coffee at Coffee Chino is truly exceptional. Every cup is a perfect balance of flavours, leaving me craving for more. The cosy atmosphere and friendly staff make it my go-to spot for a relaxing coffee break.',
+			},
+			{
+				image: '../assests/images/testimonials/mike.webp',
+				name: 'Mike Doe',
+				review:
+					"The cosy ambience at Coffee Chino always makes me feel right at home. The warm lighting, comfortable seating, and welcoming staff create the perfect atmosphere to unwind and enjoy a great cup of coffee. It's my sanctuary in the bustling city.",
+			},
+		];
+
+		/***** Functions *****/
+
+		// Testimonial card html template
+		const generateTestimonialCard = (testimonial) => {
+			const { image, name, review } = testimonial;
+			const html = `
+				<article class="testimonial splide__slide">
+					<div class="testimonial__person">
+						<img src=${image} alt=${name} loading="lazy">
+						<h3 class="heading-4">${name}</h3>
+					</div>
+					<p class="testimonial__review">
+						&ldquo; ${review} &rdquo;
+					</p>
+                </article>
+			`;
+
+			return html;
+		};
+
+		// Insert testimonials to list
+		const generateTestimonials = (testimonials) => {
+			const testimonialsList = document?.getElementById('testimonials__list');
+
+			testimonials.forEach((testimonial) => {
+				const html = generateTestimonialCard(testimonial);
+				testimonialsList.insertAdjacentHTML('afterbegin', html);
+			});
+		};
+
+		generateTestimonials(testimonialsData);
+
+		/* Initialize slider */
+		const splide = new Splide(testimonialsSlider, {
+			perPage: 2,
+			perMove: 1,
+			drag: true,
+			pagination: false,
+			gap: 'min(3vw, 5rem)',
+			classes: {
+				arrows: 'splide__arrows',
+				arrow: 'splide__arrow',
+				prev: 'splide__arrow--prev',
+				next: 'splide__arrow--next',
+			},
+			breakpoints: {
+				820: {
+					perPage: 1,
+				},
+			},
+		});
+		splide.mount();
 	})();
 });

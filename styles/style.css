@@ -94,6 +94,10 @@ textarea {
 	font: inherit;
 }
 
+textarea {
+	resize: vertical;
+}
+
 /* Base styles */
 html {
 	font-size: 100%;
@@ -498,11 +502,67 @@ header {
 	font-weight: var(--fw-bold);
 }
 
-/* Contact Us section styles */
-.contact {
-	padding-bottom: var(--section-padding);
+/* Testimonials section styles */
+.testimonials .text-center {
+	margin-bottom: 2.5rem;
 }
 
+.testimonials__slider {
+	width: clamp(15rem, 80vw - 6.25rem, 50rem);
+	margin: 0 auto;
+}
+
+.testimonial {
+	background-color: var(--headings-color);
+	border-radius: var(--radius-base);
+	padding: 1.25rem 2rem;
+	color: var(--light-color);
+}
+
+.testimonial__person {
+	display: flex;
+	column-gap: 1.5rem;
+	align-items: flex-end;
+	margin-bottom: 1.5rem;
+}
+
+.splide__arrow {
+	background-color: transparent;
+	height: 2.5rem;
+	width: 2.5rem;
+	border: 2px solid var(--accent-color);
+	border-radius: var(--radius-small);
+	font-size: 1.4em;
+	opacity: 1;
+	transition: background-color var(--transition-base);
+}
+
+.splide__arrow:hover:not(:disabled),
+.splide.is-focus-in .splide__arrow:focus {
+	background-color: var(--accent-color);
+	color: var(--light-color);
+	outline: none;
+}
+
+.splide__arrow svg {
+	fill: var(--headings-color);
+	transition: fill var(--transition-base);
+}
+
+.splide__arrow:hover:not(:disabled) svg,
+.splide__arrow:focus:not(:disabled) svg {
+	fill: var(--light-color);
+}
+
+.splide__arrow--next {
+	right: -3.125rem;
+}
+
+.splide__arrow--prev {
+	left: -3.125rem;
+}
+
+/* Contact Us section styles */
 .contact__content {
 	margin: 1.8rem auto 2rem;
 	max-width: 36rem;
@@ -655,6 +715,20 @@ header {
 		box-shadow: var(--image-shadow);
 	}
 
+	/* Testimonials section styles */
+	.splide__arrow {
+		height: 3.125rem;
+		width: 3.125rem;
+	}
+
+	.splide__arrow--next {
+		right: -5rem;
+	}
+
+	.splide__arrow--prev {
+		left: -5rem;
+	}
+
 	/* Footer styles */
 	.footer__copy {
 		font-size: inherit;
@@ -748,6 +822,15 @@ header {
 			'../assests/images/menu/menu-bg-1440.avif' type('image/avif'),
 			'../assests/images/menu/menu-bg-1440.webp' type('image/webp')
 		);
+	}
+
+	/* Testimonials section styles */
+	.splide__arrow--next {
+		right: -5.875rem;
+	}
+
+	.splide__arrow--prev {
+		left: -5.875rem;
 	}
 
 	/* Contact Us section styles */

@@ -11,7 +11,9 @@
     <link rel="preload" href="assests/fonts/OpenSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assests/fonts/OpenSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assests/fonts/Lora-Bold.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="styles/splide.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script src="scripts/splide.min.js"></script>
     <script defer src="scripts/app.js"></script>
     <title>The Best Coffee in Dublin | Coffee Chino Coffee Shop - Dublin</title>
 </head>
@@ -140,9 +142,30 @@
         </section>
         <!-- Gallery end-->
         <!-- Testimonials start -->
-        <section id="testimonials" class="section container">
+        <section id="testimonials" class="testimonials container section">
             <div class="text-center">
                 <h2 class="heading-2 section-heading">Testimonials</h2>
+            </div>
+            <div class="splide testimonials__slider" role="group" aria-label="Testimonials Slider">
+                <div class="splide__arrows splide__arrows--ltr">
+                    <button class="splide__arrow splide__arrow--prev" type="button" aria-label="Previous slide"
+                        aria-controls="splide01-track">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path
+                                d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                        </svg>
+                    </button>
+                    <button class="splide__arrow splide__arrow--next" type="button" aria-label="Next slide"
+                        aria-controls="splide01-track">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                            <path
+                                d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="splide__track ">
+                    <div id="testimonials__list" class="splide__list"></div>
+                </div>
             </div>
         </section>
         <!-- Testimonials end-->
@@ -159,11 +182,12 @@
                         us, please don't hesitate to send us a message.</p>
                     <!-- Contact Us contact form start -->
                     <form action="" class="contact__form">
-                        <input type="text" aria-label="Name" placeholder="Enter your name" class="contact__form-input">
+                        <input type="text" aria-label="Name" placeholder="Enter your name" class="contact__form-input"
+                            required>
                         <input type="email" aria-label="email" placeholder="Enter your email"
-                            class="contact__form-input">
+                            class="contact__form-input" required>
                         <textarea aria-label="Message" cols="30" rows="10" placeholder="Enter your message"
-                            class="contact__form-input"></textarea>
+                            class="contact__form-input" required></textarea>
                         <button type="submit" class="btn btn__block btn__outline btn__outline--dark">Send a
                             message</button>
                     </form>
