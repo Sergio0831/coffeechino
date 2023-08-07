@@ -200,6 +200,12 @@ h2 {
 	background-color: var(--light-color);
 }
 
+.center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .center-y {
 	display: flex;
 	align-items: center;
@@ -260,30 +266,29 @@ h2 {
 }
 
 /* Header styles */
-header {
-	height: 100vh;
-}
-
-.header__nav {
-	background-color: transparent;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 1.375rem 0;
+.header {
 	position: absolute;
 	left: 0;
 	right: 0;
+	background-color: transparent;
 	border-bottom: 1px solid var(--accent-color);
 }
 
-/* Video styles */
-.header__video {
+.header__nav {
 	display: flex;
 	align-items: center;
-	height: 100%;
+	justify-content: space-between;
+	padding: 1.375rem;
 }
 
-.header__video video {
+/* Video styles */
+.hero {
+	display: flex;
+	align-items: center;
+	height: 100vh;
+}
+
+.hero__video {
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -293,7 +298,7 @@ header {
 }
 
 /* Text on video top styles */
-.header__content h1 {
+.hero__content h1 {
 	max-width: 30.375rem;
 	margin-bottom: 1.875rem;
 }
@@ -508,22 +513,28 @@ header {
 }
 
 .testimonials__slider {
-	width: clamp(15rem, 80vw - 6.25rem, 50rem);
 	margin: 0 auto;
 }
 
 .testimonial {
 	background-color: var(--headings-color);
 	border-radius: var(--radius-base);
-	padding: 1.25rem 2rem;
+	padding: 1.25rem;
 	color: var(--light-color);
 }
 
 .testimonial__person {
+	margin-bottom: 1rem;
+}
+
+.testimonial__person img {
+	margin-bottom: 0.8rem;
+}
+
+.splide__arrows {
 	display: flex;
-	column-gap: 1.5rem;
-	align-items: flex-end;
-	margin-bottom: 1.5rem;
+	justify-content: flex-end;
+	column-gap: 0.8rem;
 }
 
 .splide__arrow {
@@ -534,11 +545,13 @@ header {
 	border-radius: var(--radius-small);
 	font-size: 1.4em;
 	opacity: 1;
+	position: unset;
 	transition: background-color var(--transition-base);
 }
 
 .splide__arrow:hover:not(:disabled),
-.splide.is-focus-in .splide__arrow:focus {
+.splide.is-focus-in .splide__arrow:focus,
+.splide .splide__arrow:focus {
 	background-color: var(--accent-color);
 	color: var(--light-color);
 	outline: none;
@@ -552,14 +565,6 @@ header {
 .splide__arrow:hover:not(:disabled) svg,
 .splide__arrow:focus:not(:disabled) svg {
 	fill: var(--light-color);
-}
-
-.splide__arrow--next {
-	right: -3.125rem;
-}
-
-.splide__arrow--prev {
-	left: -3.125rem;
 }
 
 /* Contact Us section styles */
@@ -668,6 +673,39 @@ header {
 	font-size: 0.875rem;
 }
 
+/* To top button styles */
+.top-btn {
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+	padding: 0.3rem;
+	cursor: pointer;
+	width: 3rem;
+	height: 3rem;
+	background: var(--accent-color);
+	border-radius: var(--radius-small);
+	border: none;
+	outline: none;
+	opacity: 0.7;
+	z-index: 3;
+	display: none;
+	transition: opacity var(--transition-base);
+}
+
+.top-btn.visible {
+	display: block;
+}
+
+.top-btn:hover,
+.top-btn:focus {
+	opacity: 1;
+}
+
+.top-btn__icon {
+	fill: var(--light-color);
+	height: 100%;
+}
+
 /* Tablet styles min-width 460px */
 @media screen and (min-width: 28.75rem) {
 	/* Base styles */
@@ -678,6 +716,16 @@ header {
 	/* Typography */
 	.heading-1 {
 		line-height: 120%;
+	}
+
+	/* Header styles */
+	.header {
+		margin: 0 auto;
+		width: min(75rem, calc(100% - 3.75rem));
+	}
+
+	.header__nav {
+		padding: 1.375rem 0;
 	}
 
 	/* About Us section */
@@ -716,17 +764,23 @@ header {
 	}
 
 	/* Testimonials section styles */
-	.splide__arrow {
-		height: 3.125rem;
-		width: 3.125rem;
+	.testimonials__slider {
+		width: min(80vw, 50rem);
 	}
 
-	.splide__arrow--next {
-		right: -5rem;
+	.testimonial {
+		padding: 1.25rem 2rem;
 	}
 
-	.splide__arrow--prev {
-		left: -5rem;
+	.testimonial__person {
+		display: flex;
+		align-items: flex-end;
+		column-gap: 1.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.testimonial__person img {
+		margin-bottom: 0;
 	}
 
 	/* Footer styles */
@@ -822,15 +876,6 @@ header {
 			'../assests/images/menu/menu-bg-1440.avif' type('image/avif'),
 			'../assests/images/menu/menu-bg-1440.webp' type('image/webp')
 		);
-	}
-
-	/* Testimonials section styles */
-	.splide__arrow--next {
-		right: -5.875rem;
-	}
-
-	.splide__arrow--prev {
-		left: -5.875rem;
 	}
 
 	/* Contact Us section styles */

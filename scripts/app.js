@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const scrollBtns = document?.querySelectorAll(
 			'a[href="#menu"], a[href="#contact"]',
 		);
+		const backToTopBtn = document?.querySelector('.top-btn');
 		const bodyEl = document.body;
 
 		/***** Functions *****/
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Update the active navigation menu link on scro20
 		const handleScroll = () => {
-			const sections = document.querySelectorAll('section, header');
+			const sections = document.querySelectorAll('section, .hero');
 			const scrollPosition = window.scrollY;
 
 			let activeLink = null;
@@ -97,6 +98,23 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (activeLink) {
 				setActiveLink(activeLink.parentElement);
 			}
+		};
+
+		// Show back to top button
+		const showToTopBtn = () => {
+			window.scrollY > window.innerHeight
+				? backToTopBtn.classList.add('visible')
+				: backToTopBtn.classList.remove('visible');
+		};
+
+		// Scroll to top
+		const scrollToTop = (e) => {
+			e.preventDefault();
+			backToTopBtn.blur();
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth',
+			});
 		};
 
 		/***** Event Listeners *****/
@@ -134,130 +152,135 @@ document.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 
-		// Event listener to attach the scroll event to the window
-		window.addEventListener('scroll', handleScroll);
-	})();
+		// Event listener to attach the scroll event to the window and ahow back to top button
+		window.addEventListener('scroll', () => {
+			handleScroll();
+			showToTopBtn();
+		});
 
-	/***** Drinks and food menu *****/
-	(function () {
-		/***** Variables *****/
-		const menuBtns = document.querySelectorAll('.menu__btn');
-		let drinksMenuGenerated = true;
-		let foodMenuGenerated = false;
+		// Event listener to scroll back to top when back to top button is clicked
+		backToTopBtn.addEventListener('click', scrollToTop);
 
-		// Drinks and food menu data
-		const menuItems = {
-			drinks: {
-				sizes: true,
-				categories: {
-					coffee: [
-						{
-							name: 'Espresso',
-							description: 'Espresso machine or coffee maker',
-							price: [2.5, 3],
-						},
-						{
-							name: 'Americano',
-							description: 'Espresso shot',
-							price: [3.2, 3.5],
-						},
-						{
-							name: 'Cappuccino',
-							description: 'Regular, Flavoured',
-							price: [3.5, 3.7],
-						},
-						{
-							name: 'Late',
-							description: 'Regular, Flavoured',
-							price: [3.5, 3.7],
-						},
-					],
-					tea: [
-						{
-							name: 'Black Tea',
-							description: 'Earl Gray, Irish Breakfast',
-							price: [2.7],
-						},
-						{
-							name: 'Green Tea',
-							description: 'Jasmine, Matcha',
-							price: [2.9],
-						},
-					],
-					other: [
-						{
-							name: 'Hot Chocolate',
-							description: 'Marshmallows, cream',
-							price: [3.8, 4.2],
-						},
-						{
-							name: 'Smoothies',
-							description: 'Mixed Berry, Mango-Pineapple, Banana',
-							price: [4.6, 5.1],
-						},
-					],
+		/***** Drinks and food menu *****/
+		{
+			/***** Variables *****/
+			const menuBtns = document.querySelectorAll('.menu__btn');
+			let drinksMenuGenerated = true;
+			let foodMenuGenerated = false;
+
+			// Drinks and food menu data
+			const menuItems = {
+				drinks: {
+					sizes: true,
+					categories: {
+						coffee: [
+							{
+								name: 'Espresso',
+								description: 'Espresso machine or coffee maker',
+								price: [2.5, 3],
+							},
+							{
+								name: 'Americano',
+								description: 'Espresso shot',
+								price: [3.2, 3.5],
+							},
+							{
+								name: 'Cappuccino',
+								description: 'Regular, Flavoured',
+								price: [3.5, 3.7],
+							},
+							{
+								name: 'Late',
+								description: 'Regular, Flavoured',
+								price: [3.5, 3.7],
+							},
+						],
+						tea: [
+							{
+								name: 'Black Tea',
+								description: 'Earl Gray, Irish Breakfast',
+								price: [2.7],
+							},
+							{
+								name: 'Green Tea',
+								description: 'Jasmine, Matcha',
+								price: [2.9],
+							},
+						],
+						other: [
+							{
+								name: 'Hot Chocolate',
+								description: 'Marshmallows, cream',
+								price: [3.8, 4.2],
+							},
+							{
+								name: 'Smoothies',
+								description: 'Mixed Berry, Mango-Pineapple, Banana',
+								price: [4.6, 5.1],
+							},
+						],
+					},
 				},
-			},
-			food: {
-				sizes: false,
-				categories: {
-					sandwiches: [
-						{
-							name: 'Classic BLT',
-							description: 'Bacon, Lettuce, Tomato',
-							price: [8.5],
-						},
-						{
-							name: 'Turkey and Swiss',
-							description: 'Turkey, Swiss cheese',
-							price: [8.5],
-						},
-						{
-							name: 'Ham and Cheese',
-							description: 'Tomato, Mozzarella, Basil',
-							price: [8.5],
-						},
-						{
-							name: 'Chicken Caesar Wrap',
-							description: 'Crispy chicken, Cucumber, Tomato',
-							price: [8.5],
-						},
-					],
-					salads: [
-						{
-							name: 'Caesar Salad',
-							description: 'Romaine lettuce, Caesar Dressing',
-							price: [9.5],
-						},
-						{
-							name: 'Greek Salad',
-							description: 'Mixed veg, Greek Dressing',
-							price: [10.5],
-						},
-					],
-					pastries: [
-						{
-							name: 'Muffins',
-							description: 'Blueberry, Chocolate Chip, Banana Nut',
-							price: [2.75],
-						},
-						{
-							name: 'Cake Slices',
-							description: 'Carrot, Red Velvet, Chocolate',
-							price: [4.0],
-						},
-					],
+				food: {
+					sizes: false,
+					categories: {
+						sandwiches: [
+							{
+								name: 'Classic BLT',
+								description: 'Bacon, Lettuce, Tomato',
+								price: [8.5],
+							},
+							{
+								name: 'Turkey and Swiss',
+								description: 'Turkey, Swiss cheese',
+								price: [8.5],
+							},
+							{
+								name: 'Ham and Cheese',
+								description: 'Tomato, Mozzarella, Basil',
+								price: [8.5],
+							},
+							{
+								name: 'Chicken Caesar Wrap',
+								description: 'Crispy chicken, Cucumber, Tomato',
+								price: [8.5],
+							},
+						],
+						salads: [
+							{
+								name: 'Caesar Salad',
+								description: 'Romaine lettuce, Caesar Dressing',
+								price: [9.5],
+							},
+							{
+								name: 'Greek Salad',
+								description: 'Mixed veg, Greek Dressing',
+								price: [10.5],
+							},
+						],
+						pastries: [
+							{
+								name: 'Muffins',
+								description: 'Blueberry, Chocolate Chip, Banana Nut',
+								price: [2.75],
+							},
+							{
+								name: 'Cake Slices',
+								description: 'Carrot, Red Velvet, Chocolate',
+								price: [4.0],
+							},
+						],
+					},
 				},
-			},
-		};
+			};
 
-		/***** Functions *****/
+			/***** Functions *****/
 
-		// Menu category item HTML template
-		const generateMenuCategoryItem = (categoryData) => {
-			const { name, description, price } = categoryData;
+			// Menu category item HTML template
+			const generateMenuCategoryItem = (categoryData) => {
+				const { name, description, price } = categoryData;
 
-			const html = `
+				const html = `
 				<div class='category__item'>
 					<div class='category__item-content'>
 						<h4 class='heading-4'>${name}</h4>
@@ -268,16 +291,16 @@ document.addEventListener('DOMContentLoaded', () => {
 					</div>
 				</div>
 			`;
-			return html;
-		};
+				return html;
+			};
 
-		// Menu category HTML template
-		const generateMenuCategory = (categories) => {
-			let html = ``;
+			// Menu category HTML template
+			const generateMenuCategory = (categories) => {
+				let html = ``;
 
-			for (const category in categories) {
-				const items = categories[category];
-				html += `
+				for (const category in categories) {
+					const items = categories[category];
+					html += `
 				<div class='category'>
 					<h3 class='heading-3 text-center'>
 						${category.charAt(0).toUpperCase() + category.slice(1)}
@@ -285,19 +308,19 @@ document.addEventListener('DOMContentLoaded', () => {
 					${items.map((item) => generateMenuCategoryItem(item)).join(' ')}
 				</div>
 			`;
-			}
+				}
 
-			return html;
-		};
+				return html;
+			};
 
-		// Menu HTML template
-		const generateMenu = (menuItem) => {
-			const menuCard = document.querySelector('.menu__card');
+			// Menu HTML template
+			const generateMenu = (menuItem) => {
+				const menuCard = document.querySelector('.menu__card');
 
-			// Remove previous generated menu
-			menuCard.innerHTML = '';
+				// Remove previous generated menu
+				menuCard.innerHTML = '';
 
-			let html = `
+				let html = `
 				${
 					menuItem.sizes
 						? `<div class='sizes'>
@@ -309,97 +332,97 @@ document.addEventListener('DOMContentLoaded', () => {
 				${generateMenuCategory(menuItem.categories)}
 			`;
 
-			return menuCard.insertAdjacentHTML('afterbegin', html);
-		};
+				return menuCard.insertAdjacentHTML('afterbegin', html);
+			};
 
-		// Show drinks menu by default
-		generateMenu(menuItems['drinks']);
+			// Show drinks menu by default
+			generateMenu(menuItems['drinks']);
 
-		// Show food or drinks menu on button click
-		const showMenuOnClick = (e) => {
-			e.stopPropagation();
-			const target = e.target;
+			// Show food or drinks menu on button click
+			const showMenuOnClick = (e) => {
+				e.stopPropagation();
+				const target = e.target;
 
-			// Get the aria-label attribute of the button was clicked
-			const ariaLabel = target.getAttribute('aria-label');
+				// Get the aria-label attribute of the button was clicked
+				const ariaLabel = target.getAttribute('aria-label');
 
-			// Remove active class from all buttons
-			menuBtns.forEach((btn) => btn.classList.remove('btn--active'));
+				// Remove active class from all buttons
+				menuBtns.forEach((btn) => btn.classList.remove('btn--active'));
 
-			// Add active class to the clicked button
-			target.classList.add('btn--active');
+				// Add active class to the clicked button
+				target.classList.add('btn--active');
 
-			// Check if the aria-label exist and show menu
-			if (ariaLabel) {
-				// Check which menu to generate based on the clicked button
-				if (ariaLabel.toLowerCase() === 'drinks') {
-					if (!drinksMenuGenerated) {
-						generateMenu(menuItems[ariaLabel.toLowerCase()]);
-						drinksMenuGenerated = true;
-						foodMenuGenerated = false;
-					}
-				} else if (ariaLabel.toLowerCase() === 'food') {
-					if (!foodMenuGenerated) {
-						generateMenu(menuItems[ariaLabel.toLowerCase()]);
-						drinksMenuGenerated = false;
-						foodMenuGenerated = true;
+				// Check if the aria-label exist and show menu
+				if (ariaLabel) {
+					// Check which menu to generate based on the clicked button
+					if (ariaLabel.toLowerCase() === 'drinks') {
+						if (!drinksMenuGenerated) {
+							generateMenu(menuItems[ariaLabel.toLowerCase()]);
+							drinksMenuGenerated = true;
+							foodMenuGenerated = false;
+						}
+					} else if (ariaLabel.toLowerCase() === 'food') {
+						if (!foodMenuGenerated) {
+							generateMenu(menuItems[ariaLabel.toLowerCase()]);
+							drinksMenuGenerated = false;
+							foodMenuGenerated = true;
+						}
 					}
 				}
-			}
-		};
+			};
 
-		/***** Event listeners *****/
-		menuBtns.forEach((btn) => btn.addEventListener('click', showMenuOnClick));
-	})();
+			/***** Event listeners *****/
+			menuBtns.forEach((btn) => btn.addEventListener('click', showMenuOnClick));
+		}
 
-	/***** Testimonials *****/
-	(function () {
-		/***** Variables *****/
-		const testimonialsSlider = document?.querySelector('.splide');
+		/***** Testimonials *****/
+		{
+			/***** Variables *****/
+			const testimonialsSlider = document?.querySelector('.splide');
 
-		/* Testimonials data */
-		const testimonialsData = [
-			{
-				image: '../assests/images/testimonials/erik.webp',
-				name: 'Erik Lamela',
-				review:
-					"I can't say enough about the exceptional service at Coffee Chino. The staff is incredibly friendly, knowledgeable, and passionate. They always go the extra mile to ensure I have a memorable experience. It's the kind of place that makes you feel like a valued customer.",
-			},
-			{
-				image: '../assests/images/testimonials/sarah.webp',
-				name: 'Sarah Marie',
-				review:
-					'The combination of delicious food and incredible coffee at Coffee Chino is unbeatable. From their mouth watering pastries to their expertly crafted lattes, every visit is a delightful experience. It has become my favourite spot to indulge in a moment of pure bliss.',
-			},
-			{
-				image: '../assests/images/testimonials/john.webp',
-				name: 'John Lee',
-				review:
-					"I'm a coffee enthusiast, and I must say, Coffee Chino has impressed me with their dedication to quality. The attention to detail in their brewing process and the rich, aromatic flavours of their coffee are unparalleled. It's a true haven for coffee lovers.",
-			},
-			{
-				image: '../assests/images/testimonials/emily.webp',
-				name: 'Emily Walsh',
-				review:
-					'The coffee at Coffee Chino is truly exceptional. Every cup is a perfect balance of flavours, leaving me craving for more. The cosy atmosphere and friendly staff make it my go-to spot for a relaxing coffee break.',
-			},
-			{
-				image: '../assests/images/testimonials/mike.webp',
-				name: 'Mike Doe',
-				review:
-					"The cosy ambience at Coffee Chino always makes me feel right at home. The warm lighting, comfortable seating, and welcoming staff create the perfect atmosphere to unwind and enjoy a great cup of coffee. It's my sanctuary in the bustling city.",
-			},
-		];
+			/* Testimonials data */
+			const testimonialsData = [
+				{
+					image: '../assests/images/testimonials/erik.webp',
+					name: 'Erik Lamela',
+					review:
+						"I can't say enough about the exceptional service at Coffee Chino. The staff is incredibly friendly, knowledgeable, and passionate. They always go the extra mile to ensure I have a memorable experience. It's the kind of place that makes you feel like a valued customer.",
+				},
+				{
+					image: '../assests/images/testimonials/sarah.webp',
+					name: 'Sarah Marie',
+					review:
+						'The combination of delicious food and incredible coffee at Coffee Chino is unbeatable. From their mouth watering pastries to their expertly crafted lattes, every visit is a delightful experience. It has become my favourite spot to indulge in a moment of pure bliss.',
+				},
+				{
+					image: '../assests/images/testimonials/john.webp',
+					name: 'John Lee',
+					review:
+						"I'm a coffee enthusiast, and I must say, Coffee Chino has impressed me with their dedication to quality. The attention to detail in their brewing process and the rich, aromatic flavours of their coffee are unparalleled. It's a true haven for coffee lovers.",
+				},
+				{
+					image: '../assests/images/testimonials/emily.webp',
+					name: 'Emily Walsh',
+					review:
+						'The coffee at Coffee Chino is truly exceptional. Every cup is a perfect balance of flavours, leaving me craving for more. The cosy atmosphere and friendly staff make it my go-to spot for a relaxing coffee break.',
+				},
+				{
+					image: '../assests/images/testimonials/mike.webp',
+					name: 'Mike Doe',
+					review:
+						"The cosy ambience at Coffee Chino always makes me feel right at home. The warm lighting, comfortable seating, and welcoming staff create the perfect atmosphere to unwind and enjoy a great cup of coffee. It's my sanctuary in the bustling city.",
+				},
+			];
 
-		/***** Functions *****/
+			/***** Functions *****/
 
-		// Testimonial card html template
-		const generateTestimonialCard = (testimonial) => {
-			const { image, name, review } = testimonial;
-			const html = `
+			// Testimonial card html template
+			const generateTestimonialCard = (testimonial) => {
+				const { image, name, review } = testimonial;
+				const html = `
 				<article class="testimonial splide__slide">
 					<div class="testimonial__person">
-						<img src=${image} alt=${name} loading="lazy">
+						<img src=${image} alt=${name} loading="lazy" width="100" height="100">
 						<h3 class="heading-4">${name}</h3>
 					</div>
 					<p class="testimonial__review">
@@ -408,40 +431,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 </article>
 			`;
 
-			return html;
-		};
+				return html;
+			};
 
-		// Insert testimonials to list
-		const generateTestimonials = (testimonials) => {
-			const testimonialsList = document?.getElementById('testimonials__list');
+			// Insert testimonials to list
+			const generateTestimonials = (testimonials) => {
+				const testimonialsList = document?.getElementById('testimonials__list');
 
-			testimonials.forEach((testimonial) => {
-				const html = generateTestimonialCard(testimonial);
-				testimonialsList.insertAdjacentHTML('afterbegin', html);
-			});
-		};
+				testimonials.forEach((testimonial) => {
+					const html = generateTestimonialCard(testimonial);
+					testimonialsList.insertAdjacentHTML('afterbegin', html);
+				});
+			};
 
-		generateTestimonials(testimonialsData);
+			generateTestimonials(testimonialsData);
 
-		/* Initialize slider */
-		const splide = new Splide(testimonialsSlider, {
-			perPage: 2,
-			perMove: 1,
-			drag: true,
-			pagination: false,
-			gap: 'min(3vw, 5rem)',
-			classes: {
-				arrows: 'splide__arrows',
-				arrow: 'splide__arrow',
-				prev: 'splide__arrow--prev',
-				next: 'splide__arrow--next',
-			},
-			breakpoints: {
-				820: {
-					perPage: 1,
+			/* Initialize slider */
+			const splide = new Splide(testimonialsSlider, {
+				perPage: 2,
+				perMove: 1,
+				drag: true,
+				pagination: false,
+				gap: 'min(3vw, 5rem)',
+				classes: {
+					arrows: 'splide__arrows',
+					arrow: 'splide__arrow',
+					prev: 'splide__arrow--prev',
+					next: 'splide__arrow--next',
 				},
-			},
-		});
-		splide.mount();
+				breakpoints: {
+					820: {
+						perPage: 1,
+					},
+				},
+			});
+			splide.mount();
+		}
 	})();
 });

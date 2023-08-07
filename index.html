@@ -20,11 +20,11 @@
 
 <body>
     <!-- Header start -->
-    <header id="home">
-        <div class="container header__nav">
+    <header class="header">
+        <div class="header__nav">
             <img src="assests/images/logo.svg" alt="Logo" width="228" height="35">
             <!-- Main navigation start -->
-            <nav class="nav">
+            <nav id="main-navigation" class="nav">
                 <ul class="nav__list text-center">
                     <li class="nav__item active-link"><a href="#home">Home</a></li>
                     <li class="nav__item"><a href="#about">About Us</a></li>
@@ -35,27 +35,28 @@
                 </ul>
             </nav>
             <!-- Main navigation end -->
-            <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false">
+            <button class="nav__hamburger" aria-label="Open menu" aria-controls="main-navigation" aria-expanded="false">
                 <span class="line"></span>
             </button>
         </div>
-        <!-- Video start -->
-        <div class="header__video">
-            <video poster="assests/images/header-bg-video-poster.webp" autoplay muted loop>
-                <source src="assests/images/header-bg-video.webm" type="video/webm">
-                <source src="assests/images/header-bg-video.mp4" type="video/mp4">
-                Your browser is not suported
-            </video>
-            <div class="container header__content">
-                <h1 class="heading-1">
-                    Crafted with Care, Brewed for You: Discover the Difference
-                </h1>
-                <a href="#menu" class="btn btn__outline btn__outline--light">Our Menu</a>
-            </div>
-        </div>
-        <!-- Video end -->
     </header>
     <!-- Header end -->
+    <!-- Video start -->
+    <div id="home" class="hero">
+        <video class="hero__video" poster="assests/images/header-bg-video-poster.webp" autoplay muted loop>
+            <source src="assests/images/header-bg-video.webm" type="video/webm">
+            <source src="assests/images/header-bg-video.mp4" type="video/mp4">
+            Your browser is not suported
+        </video>
+        <div class="container hero__content">
+            <h1 class="heading-1">
+                Crafted with Care, Brewed for You: Discover the Difference
+            </h1>
+            <a href="#menu" class="btn btn__outline btn__outline--light">Our Menu</a>
+        </div>
+    </div>
+    <!-- Video end -->
+
     <!-- Main start -->
     <main>
         <!-- About Us start -->
@@ -271,6 +272,13 @@
         </div>
     </footer>
     <!-- Footer Us end-->
+    <!-- Scroll to top button start -->
+    <button class="top-btn center" type="button" aria-label="Scroll to top"><svg xmlns="http://www.w3.org/2000/svg"
+            class="top-btn__icon" viewBox="0 0 512 512">
+            <path
+                d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
+        </svg></button>
+    <!-- Scroll to top button end -->
 </body>
 
 </html>
