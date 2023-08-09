@@ -56,7 +56,6 @@
         </div>
     </div>
     <!-- Video end -->
-
     <!-- Main start -->
     <main>
         <!-- About Us start -->
@@ -136,9 +135,82 @@
         </section>
         <!-- Menu end-->
         <!-- Gallery start -->
-        <section id="gallery" class="section container">
+        <section id="gallery" class="gallery section container">
             <div class="text-center">
                 <h2 class="heading-2 section-heading">Gallery</h2>
+            </div>
+            <div class="gallery__images">
+                <!-- Gallery image 1 start -->
+                <picture class="gallery__image-1">
+                    <source srcset="assests/images/gallery/gallery-1-desktop.avif" type="image/avif"
+                        media="(min-width: 28.75rem)">
+                    <source srcset="assests/images/gallery/gallery-1-mobile.avif" type="image/avif">
+                    <source srcset="assests/images/gallery/gallery-1-desktop.webp" type="image/webp"
+                        media="(min-width: 28.75rem)">
+                    <img loading="lazy" src="assests/images/gallery/gallery-1-mobile.webp"
+                        data-imagesrc="assests/images/gallery/gallery-1-large.jpg" class="gallery__image " width="400"
+                        height="800" alt="Coffee Shop Interior">
+                </picture>
+                <!-- Gallery image 1 end -->
+                <!-- Gallery image 2 start -->
+                <picture class="gallery__image-2">
+                    <source srcset="assests/images/gallery/gallery-2-mobile.avif" type="image/avif">
+                    <img loading="lazy" src="assests/images/gallery/gallery-2-mobile.webp"
+                        data-imagesrc="assests/images/gallery/gallery-2-large.jpg" class="gallery__image " width="400"
+                        height="300" alt="Sandwich">
+                </picture>
+                <!-- Gallery image 2 end -->
+                <!-- Gallery image 3 start -->
+                <picture class="gallery__image-3">
+                    <source srcset="assests/images/gallery/gallery-3-desktop.avif" type="image/avif"
+                        media="(min-width: 28.75rem)">
+                    <source srcset="assests/images/gallery/gallery-3-mobile.avif" type="image/avif">
+                    <source srcset="assests/images/gallery/gallery-3-desktop.webp" type="image/webp"
+                        media="(min-width: 28.75rem)">
+                    <img loading="lazy" src="assests/images/gallery/gallery-3-mobile.webp"
+                        data-imagesrc="assests/images/gallery/gallery-3-large.jpg" class="gallery__image " width="400"
+                        height="476" alt="Coffee Shop Interior">
+                </picture>
+                <!-- Gallery image 3 end -->
+                <!-- Gallery image 4 start -->
+                <picture class="gallery__image-4">
+                    <source srcset="assests/images/gallery/gallery-4-desktop.avif" type="image/avif"
+                        media="(min-width: 28.75rem)">
+                    <source srcset="assests/images/gallery/gallery-4-mobile.avif" type="image/avif">
+                    <source srcset="assests/images/gallery/gallery-4-desktop.webp" type="image/webp"
+                        media="(min-width: 28.75rem)">
+                    <img loading="lazy" src="assests/images/gallery/gallery-4-mobile.webp"
+                        data-imagesrc="assests/images/gallery/gallery-4-large.jpg" class="gallery__image " width="400"
+                        height="476" alt="Muffins">
+                </picture>
+                <!-- Gallery image 4 end -->
+                <!-- Gallery image 5 start -->
+                <picture class="gallery__image-5">
+                    <source srcset="assests/images/gallery/gallery-5-mobile.avif" type="image/avif">
+                    <img loading="lazy" src="assests/images/gallery/gallery-5-mobile.webp"
+                        data-imagesrc="assests/images/gallery/gallery-5-large.jpg" class="gallery__image " width="400"
+                        height="300" alt="Sandwich">
+                </picture>
+                <!-- Gallery image 5 end -->
+            </div>
+            <div class="lightbox">
+                <div class="lightbox__image-wrapper">
+                    <div class="lightbox__btn-wrapper">
+                        <button class="lightbox__btn btn__arrow lightbox__btn--prev center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path
+                                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                            </svg>
+                        </button>
+                        <button class="lightbox__btn btn__arrow lightbox__btn--next center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path
+                                    d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <img alt="Coffee Shop Interior" class="lightbox__image">
+                </div>
             </div>
         </section>
         <!-- Gallery end-->
@@ -149,14 +221,14 @@
             </div>
             <div class="splide testimonials__slider" role="group" aria-label="Testimonials Slider">
                 <div class="splide__arrows splide__arrows--ltr">
-                    <button class="splide__arrow splide__arrow--prev" type="button" aria-label="Previous slide"
-                        aria-controls="splide01-track">
+                    <button class="btn__arrow splide__arrow splide__arrow--prev" type="button"
+                        aria-label="Previous slide" aria-controls="splide01-track">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                             <path
                                 d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
                         </svg>
                     </button>
-                    <button class="splide__arrow splide__arrow--next" type="button" aria-label="Next slide"
+                    <button class="btn__arrow splide__arrow splide__arrow--next" type="button" aria-label="Next slide"
                         aria-controls="splide01-track">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                             <path

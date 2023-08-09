@@ -50,8 +50,8 @@
 	--transition-base: 0.3s ease;
 
 	/* Effects */
-	--image-shadow: 0px 6px 5px rgb(0, 0, 0, 0.02),
-		0px 22px 18px rgb(0, 0, 0, 0.03), 0px 100px 80px rgb(0, 0, 0, 0.05);
+	--image-shadow: 0 0.5rem 0.5rem rgb(0, 0, 0, 0.02),
+		0 1.375rem 1.125rem rgb(0, 0, 0, 0.03), 0 6.25rem 5rem rgb(0, 0, 0, 0.05);
 
 	/* Border radius */
 	--radius-small: 5px;
@@ -263,6 +263,37 @@ h2 {
 
 .btn__block {
 	width: 100%;
+}
+
+.btn__arrow {
+	background-color: transparent;
+	height: 2.5rem;
+	width: 2.5rem;
+	border: 2px solid var(--accent-color);
+	border-radius: var(--radius-small);
+	font-size: 1.4em;
+	opacity: 1;
+	cursor: pointer;
+	transition: background-color var(--transition-base);
+}
+
+.btn__arrow svg {
+	width: 1.2em;
+	height: 1.2em;
+	fill: var(--headings-color);
+	transition: fill var(--transition-base);
+}
+
+.btn__arrow:hover:not(:disabled),
+.btn__arrow:focus {
+	background-color: var(--accent-color);
+	color: var(--light-color);
+	outline: none;
+}
+
+.btn__arrow:hover:not(:disabled) svg,
+.btn__arrow:focus:not(:disabled) svg {
+	fill: var(--light-color);
 }
 
 /* Header styles */
@@ -507,6 +538,31 @@ h2 {
 	font-weight: var(--fw-bold);
 }
 
+/* Gallery styles */
+.gallery .text-center {
+	margin-bottom: 2.5rem;
+}
+
+.gallery__images {
+	display: grid;
+	gap: 1.5rem;
+}
+
+.gallery__image {
+	border-radius: var(--radius-base);
+	box-shadow: var(--image-shadow);
+	cursor: pointer;
+	transition: box-shadow var(--transition-base);
+}
+
+.lightbox__btn-wrapper {
+	display: flex;
+}
+
+.lightbox__btn--prev {
+	transform: rotate(180deg);
+}
+
 /* Testimonials section styles */
 .testimonials .text-center {
 	margin-bottom: 2.5rem;
@@ -531,6 +587,11 @@ h2 {
 	margin-bottom: 0.8rem;
 }
 
+/* Testimonials slider styles */
+.splide__track {
+	border-radius: var(--radius-base);
+}
+
 .splide__arrows {
 	display: flex;
 	justify-content: flex-end;
@@ -538,33 +599,11 @@ h2 {
 }
 
 .splide__arrow {
-	background-color: transparent;
-	height: 2.5rem;
-	width: 2.5rem;
-	border: 2px solid var(--accent-color);
-	border-radius: var(--radius-small);
-	font-size: 1.4em;
-	opacity: 1;
 	position: unset;
-	transition: background-color var(--transition-base);
 }
 
-.splide__arrow:hover:not(:disabled),
-.splide.is-focus-in .splide__arrow:focus,
-.splide .splide__arrow:focus {
-	background-color: var(--accent-color);
-	color: var(--light-color);
+.splide.is-focus-in .splide__arrow:focus {
 	outline: none;
-}
-
-.splide__arrow svg {
-	fill: var(--headings-color);
-	transition: fill var(--transition-base);
-}
-
-.splide__arrow:hover:not(:disabled) svg,
-.splide__arrow:focus:not(:disabled) svg {
-	fill: var(--light-color);
 }
 
 /* Contact Us section styles */
@@ -676,8 +715,8 @@ h2 {
 /* To top button styles */
 .top-btn {
 	position: fixed;
-	bottom: 1rem;
-	right: 1rem;
+	bottom: 3vw;
+	right: 3vw;
 	padding: 0.3rem;
 	cursor: pointer;
 	width: 3rem;
@@ -686,14 +725,17 @@ h2 {
 	border-radius: var(--radius-small);
 	border: none;
 	outline: none;
-	opacity: 0.7;
+	opacity: 0;
 	z-index: 3;
-	display: none;
-	transition: opacity var(--transition-base);
+	transform: scale(0.6);
+	transition: opacity var(--transition-base), transform var(--transition-base);
+	pointer-events: none;
 }
 
 .top-btn.visible {
-	display: block;
+	transform: scale(1);
+	opacity: 0.7;
+	pointer-events: visible;
 }
 
 .top-btn:hover,
@@ -761,6 +803,34 @@ h2 {
 		background-color: var(--light-color);
 		border-radius: var(--radius-base);
 		box-shadow: var(--image-shadow);
+	}
+
+	/* Gallery styles */
+	.gallery__images {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.gallery__image-1 {
+		grid-row: 1 / 5;
+	}
+
+	.gallery__image-2 {
+		grid-row: 5 / 6;
+	}
+
+	.gallery__image-3 {
+		grid-column: 2;
+		grid-row: 3 / 6;
+	}
+
+	.gallery__image-4 {
+		grid-column: 2;
+		grid-row: 1 / 2;
+	}
+
+	.gallery__image-5 {
+		grid-column: 2;
+		grid-row: 2 / 3;
 	}
 
 	/* Testimonials section styles */
@@ -876,6 +946,35 @@ h2 {
 			'../assests/images/menu/menu-bg-1440.avif' type('image/avif'),
 			'../assests/images/menu/menu-bg-1440.webp' type('image/webp')
 		);
+	}
+
+	/* Gallery styles */
+	.gallery__images {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.gallery__image-1 {
+		grid-row: 1 / 6;
+	}
+
+	.gallery__image-2 {
+		grid-column: 2;
+		grid-row: 1;
+	}
+
+	.gallery__image-3 {
+		grid-column: 2;
+		grid-row: 2 / 6;
+	}
+
+	.gallery__image-4 {
+		grid-column: 3;
+		grid-row: 1 / 5;
+	}
+
+	.gallery__image-5 {
+		grid-column: 3;
+		grid-row: 5;
 	}
 
 	/* Contact Us section styles */
