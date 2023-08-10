@@ -157,13 +157,11 @@ h2 {
 }
 
 .dis-scroll {
-	position: fixed;
-	left: 0;
-	top: 0;
 	overflow: hidden;
-	width: 100%;
-	height: 100vh;
-	overscroll-behavior: none;
+}
+
+.no-scroll {
+	overflow: hidden;
 }
 
 .section {
@@ -266,34 +264,17 @@ h2 {
 }
 
 .btn__arrow {
-	background-color: transparent;
 	height: 2.5rem;
 	width: 2.5rem;
-	border: 2px solid var(--accent-color);
 	border-radius: var(--radius-small);
 	font-size: 1.4em;
 	opacity: 1;
 	cursor: pointer;
-	transition: background-color var(--transition-base);
 }
 
 .btn__arrow svg {
 	width: 1.2em;
 	height: 1.2em;
-	fill: var(--headings-color);
-	transition: fill var(--transition-base);
-}
-
-.btn__arrow:hover:not(:disabled),
-.btn__arrow:focus {
-	background-color: var(--accent-color);
-	color: var(--light-color);
-	outline: none;
-}
-
-.btn__arrow:hover:not(:disabled) svg,
-.btn__arrow:focus:not(:disabled) svg {
-	fill: var(--light-color);
 }
 
 /* Header styles */
@@ -552,11 +533,95 @@ h2 {
 	border-radius: var(--radius-base);
 	box-shadow: var(--image-shadow);
 	cursor: pointer;
-	transition: box-shadow var(--transition-base);
+	transition: outline var(--transition-base), transform var(--transition-base);
+	outline-offset: 0.5rem;
+}
+
+.lightbox {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 5;
+	display: grid;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity var(--transition-base);
+	background-color: rgba(35, 25, 23, 0.9);
+}
+
+.lightbox.show {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.lightbox__image-wrapper {
+	display: grid;
+	max-height: 90vh;
+	grid-template-columns: 1fr;
+	grid-template-rows: max-content 1fr max-content;
+	opacity: 0;
+	transform: scale(0.8);
+	transition: opacity var(--transition-base), transform var(--transition-base);
+}
+
+.lightbox.show .lightbox__image-wrapper {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.lightbox__image-details {
+	width: 100%;
+	justify-content: space-between;
+}
+
+.lightbox__image-details p {
+	color: var(--light-color);
+}
+
+.lightbox__btn--close {
+	background-color: transparent;
+	border: none;
+	color: var(--light-color);
+	outline: none;
+	transition: color var(--transition-base);
+}
+
+.lightbox__btn--close:hover,
+.lightbox__btn--close:focus {
+	color: var(--accent-color);
+}
+
+.lightbox__image {
+	width: 100%;
+	border-radius: var(--radius-base);
+	transition: opacity var(--transition-base);
 }
 
 .lightbox__btn-wrapper {
 	display: flex;
+	justify-content: flex-end;
+	column-gap: 1rem;
+	padding: 0.8rem 0 0 0;
+}
+
+.lightbox__btn {
+	border: none;
+	background-color: var(--accent-color);
+	opacity: 1;
+	outline: none;
+	color: var(--light-color);
+	transition: background-color var(--transition-base);
+}
+
+.lightbox__btn:disabled {
+	opacity: 0.3;
+}
+
+.lightbox__btn:hover:not(:disabled),
+.lightbox__btn:focus:not(:disabled) {
+	background-color: var(--headings-color);
 }
 
 .lightbox__btn--prev {
@@ -600,10 +665,26 @@ h2 {
 
 .splide__arrow {
 	position: unset;
+	background-color: transparent;
+	border: 2px solid var(--accent-color);
+	transition: background-color var(--transition-base);
 }
 
+.splide__arrow svg {
+	fill: var(--headings-color);
+	transition: color var(--transition-base);
+}
+
+.splide__arrow:hover:not(:disabled),
 .splide.is-focus-in .splide__arrow:focus {
+	background-color: var(--accent-color);
 	outline: none;
+}
+
+.splide.is-focus-in .splide__arrow:focus,
+.splide__arrow:hover:not(:disabled) svg,
+.splide.is-focus-in .splide__arrow:focus:not(:disabled) svg {
+	fill: var(--light-color);
 }
 
 /* Contact Us section styles */
@@ -721,7 +802,8 @@ h2 {
 	cursor: pointer;
 	width: 3rem;
 	height: 3rem;
-	background: var(--accent-color);
+	background-color: var(--accent-color);
+	color: var(--light-color);
 	border-radius: var(--radius-small);
 	border: none;
 	outline: none;
@@ -741,11 +823,6 @@ h2 {
 .top-btn:hover,
 .top-btn:focus {
 	opacity: 1;
-}
-
-.top-btn__icon {
-	fill: var(--light-color);
-	height: 100%;
 }
 
 /* Tablet styles min-width 460px */
@@ -951,6 +1028,21 @@ h2 {
 	/* Gallery styles */
 	.gallery__images {
 		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.gallery__images picture:hover {
+		z-index: 1;
+	}
+
+	.gallery__image {
+		cursor: pointer;
+		transition: outline var(--transition-base), transform var(--transition-base);
+		outline-offset: 0.5rem;
+	}
+
+	.gallery__image:hover {
+		outline: 0.8rem solid var(--accent-color);
+		transform: scale(1.05);
 	}
 
 	.gallery__image-1 {

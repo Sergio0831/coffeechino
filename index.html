@@ -148,16 +148,16 @@
                     <source srcset="assests/images/gallery/gallery-1-desktop.webp" type="image/webp"
                         media="(min-width: 28.75rem)">
                     <img loading="lazy" src="assests/images/gallery/gallery-1-mobile.webp"
-                        data-imagesrc="assests/images/gallery/gallery-1-large.jpg" class="gallery__image " width="400"
-                        height="800" alt="Coffee Shop Interior">
+                        data-imagesrc="assests/images/gallery/lightbox/gallery-1-large.webp" class="gallery__image "
+                        width="400" height="800" alt="Coffee Shop Interior">
                 </picture>
                 <!-- Gallery image 1 end -->
                 <!-- Gallery image 2 start -->
                 <picture class="gallery__image-2">
                     <source srcset="assests/images/gallery/gallery-2-mobile.avif" type="image/avif">
                     <img loading="lazy" src="assests/images/gallery/gallery-2-mobile.webp"
-                        data-imagesrc="assests/images/gallery/gallery-2-large.jpg" class="gallery__image " width="400"
-                        height="300" alt="Sandwich">
+                        data-imagesrc="assests/images/gallery/lightbox/gallery-2-large.webp" class="gallery__image "
+                        width="400" height="300" alt="Sandwich">
                 </picture>
                 <!-- Gallery image 2 end -->
                 <!-- Gallery image 3 start -->
@@ -168,8 +168,8 @@
                     <source srcset="assests/images/gallery/gallery-3-desktop.webp" type="image/webp"
                         media="(min-width: 28.75rem)">
                     <img loading="lazy" src="assests/images/gallery/gallery-3-mobile.webp"
-                        data-imagesrc="assests/images/gallery/gallery-3-large.jpg" class="gallery__image " width="400"
-                        height="476" alt="Coffee Shop Interior">
+                        data-imagesrc="assests/images/gallery/lightbox/gallery-3-large.webp" class="gallery__image "
+                        width="400" height="476" alt="Woman in Coffee Shop">
                 </picture>
                 <!-- Gallery image 3 end -->
                 <!-- Gallery image 4 start -->
@@ -180,36 +180,50 @@
                     <source srcset="assests/images/gallery/gallery-4-desktop.webp" type="image/webp"
                         media="(min-width: 28.75rem)">
                     <img loading="lazy" src="assests/images/gallery/gallery-4-mobile.webp"
-                        data-imagesrc="assests/images/gallery/gallery-4-large.jpg" class="gallery__image " width="400"
-                        height="476" alt="Muffins">
+                        data-imagesrc="assests/images/gallery/lightbox/gallery-4-large.webp" class="gallery__image "
+                        width="400" height="476" alt="Muffins">
                 </picture>
                 <!-- Gallery image 4 end -->
                 <!-- Gallery image 5 start -->
                 <picture class="gallery__image-5">
                     <source srcset="assests/images/gallery/gallery-5-mobile.avif" type="image/avif">
                     <img loading="lazy" src="assests/images/gallery/gallery-5-mobile.webp"
-                        data-imagesrc="assests/images/gallery/gallery-5-large.jpg" class="gallery__image " width="400"
-                        height="300" alt="Sandwich">
+                        data-imagesrc="assests/images/gallery/lightbox/gallery-5-large.webp" class="gallery__image "
+                        width="400" height="300" alt="Prawns Salad">
                 </picture>
                 <!-- Gallery image 5 end -->
             </div>
-            <div class="lightbox">
-                <div class="lightbox__image-wrapper">
+            <div class="lightbox center">
+                <div class="lightbox__image-wrapper container">
+                    <div class="lightbox__image-details center-y">
+                        <p><span class="lightbox__image-current"></span> / <span class="lightbox__image-total"></span>
+                        </p>
+                        <button type="button" class="lightbox__btn--close btn__arrow center"
+                            aria-label="Close Lightbox Gallery">
+                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                                <path
+                                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <img src="assests/images/gallery/lightbox/gallery-1-large.webp" alt="Coffee Shop Interior"
+                        class="lightbox__image" width="1200" height="900">
                     <div class="lightbox__btn-wrapper">
-                        <button class="lightbox__btn btn__arrow lightbox__btn--prev center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <button type="button" class="lightbox__btn btn__arrow lightbox__btn--prev center"
+                            aria-label="Prev Image">
+                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                 <path
                                     d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
                             </svg>
                         </button>
-                        <button class="lightbox__btn btn__arrow lightbox__btn--next center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <button type="button" class="lightbox__btn btn__arrow lightbox__btn--next center"
+                            aria-label="Next Image">
+                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                                 <path
                                     d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
                             </svg>
                         </button>
                     </div>
-                    <img alt="Coffee Shop Interior" class="lightbox__image">
                 </div>
             </div>
         </section>
@@ -222,14 +236,13 @@
             <div class="splide testimonials__slider" role="group" aria-label="Testimonials Slider">
                 <div class="splide__arrows splide__arrows--ltr">
                     <button class="btn__arrow splide__arrow splide__arrow--prev" type="button"
-                        aria-label="Previous slide" aria-controls="splide01-track">
+                        aria-label="Previous slide">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                             <path
                                 d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
                         </svg>
                     </button>
-                    <button class="btn__arrow splide__arrow splide__arrow--next" type="button" aria-label="Next slide"
-                        aria-controls="splide01-track">
+                    <button class="btn__arrow splide__arrow splide__arrow--next" type="button" aria-label="Next slide">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                             <path
                                 d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z" />
@@ -345,8 +358,8 @@
     </footer>
     <!-- Footer Us end-->
     <!-- Scroll to top button start -->
-    <button class="top-btn center" type="button" aria-label="Scroll to top"><svg xmlns="http://www.w3.org/2000/svg"
-            class="top-btn__icon" viewBox="0 0 512 512">
+    <button class="top-btn center" type="button" aria-label="Scroll to top"><svg fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path
                 d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
         </svg></button>

@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Add or remove scroll based on menu is open or closed
 		const toggleScroll = () => {
 			if (navMenu.classList.contains('nav--active')) {
-				bodyEl.classList.add('dis-scroll');
+				bodyEl.classList.add('no-scroll');
 			} else {
-				bodyEl.classList.remove('dis-scroll');
+				bodyEl.classList.remove('no-scroll');
 			}
 		};
 
@@ -469,4 +469,104 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	/***** Image gallery *****/
+	{
+		/***** Variables *****/
+		const lightbox = document.querySelector('.lightbox');
+		const lightboxImageWrapper = document.querySelector(
+			'.lightbox__image-wrapper',
+		);
+		const lightboxImage = document.querySelector('.lightbox__image');
+		const lightboxImages = document.querySelectorAll('.gallery__image');
+		const totalImages = lightboxImages.length;
+		const lightBoxTotal = document.querySelector('.lightbox__image-total');
+		const lightboxCloseBtn = document.querySelector('.lightbox__btn--close');
+		const lightboxBtnNext = document.querySelector('.lightbox__btn--next');
+		const lightboxBtnPrev = document.querySelector('.lightbox__btn--prev');
+		const bodyEl = document.body;
+
+		let currentImageIndex = 0;
+		lightBoxTotal.textContent = `0${totalImages}`;
+
+		/***** Functions *****/
+		const updateLightboxImage = (index) => {
+			const lightboxCurrent = document.querySelector(
+				'.lightbox__image-current',
+			);
+
+			lightboxImage.src = lightboxImages[index].getAttribute('data-imagesrc');
+			lightboxImage.alt = lightboxImages[index].alt;
+			lightboxCurrent.textContent = `0${index + 1}`;
+			currentImageIndex = index;
+
+			// Disbale prev button when first image
+			if (index === 0) {
+				lightboxBtnPrev.disabled = true;
+			} else {
+				lightboxBtnPrev.disabled = false;
+			}
+
+			// Disbale next button when last image
+			if (index === lightboxImages.length - 1) {
+				lightboxBtnNext.disabled = true;
+			} else {
+				lightboxBtnNext.disabled = false;
+			}
+		};
+
+		// Show lightbox
+		const showLightbox = () => {
+			lightbox.classList.add('show');
+			bodyEl.classList.add('dis-scroll');
+		};
+
+		// Hide lightbox
+		const hideLightbox = () => {
+			lightbox.classList.remove('show');
+			bodyEl.classList.remove('dis-scroll');
+		};
+
+		/***** Event listeners *****/
+
+		// Open lightbox image on click gallery image
+		lightboxImages.forEach((image, index) => {
+			image.addEventListener('click', () => {
+				showLightbox();
+				currentImageIndex = index;
+				updateLightboxImage(currentImageIndex);
+			});
+		});
+
+		// Close lightbox on click close button
+		lightboxCloseBtn.addEventListener('click', hideLightbox);
+
+		// Prev image on click prev button
+		lightboxBtnPrev.addEventListener('click', () => {
+			if (currentImageIndex > 0) {
+				currentImageIndex--;
+				updateLightboxImage(currentImageIndex);
+			}
+		});
+
+		// Next image on click next button
+		lightboxBtnNext.addEventListener('click', () => {
+			if (currentImageIndex < totalImages - 1) {
+				currentImageIndex++;
+				updateLightboxImage(currentImageIndex);
+			}
+		});
+
+		// Close lightbox when click outside of lightbox image
+		document.addEventListener('click', (event) => {
+			if (event.target === lightbox) {
+				hideLightbox();
+			}
+		});
+
+		// Close the lightbox when the "Escape" key is pressed
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape') {
+				hideLightbox();
+			}
+		});
+	}
 });
