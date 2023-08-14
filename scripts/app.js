@@ -11,18 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			'a[href="#menu"], a[href="#contact"]',
 		);
 		const backToTopBtn = document?.querySelector('.top-btn');
-		const bodyEl = document.body;
 
 		/***** Functions *****/
-
-		// Add or remove scroll based on menu is open or closed
-		const toggleScroll = () => {
-			if (navMenu.classList.contains('nav--active')) {
-				bodyEl.classList.add('no-scroll');
-			} else {
-				bodyEl.classList.remove('no-scroll');
-			}
-		};
 
 		// Toggle nav menu on button click
 		const toggleMenu = () => {
@@ -36,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				'aria-label',
 				navMenu.classList.contains('nav--active') ? 'Close menu' : 'Open menu',
 			);
-			toggleScroll();
+			toggleScroll(navMenu.classList.contains('nav--active'));
 		};
 
 		// Close menu function
@@ -45,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			navMenu?.classList.remove('nav--active');
 			navBtn?.setAttribute('aria-expanded', 'false');
 			navBtn?.setAttribute('aria-label', 'Open menu');
-			toggleScroll();
+			toggleScroll(false);
 		};
 
 		// Scroll to element on link click
@@ -125,9 +115,12 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 
 		// Event listener to close the menu when clicked outside
-		document.addEventListener('click', (event) => {
-			if (!navMenu?.contains(event.target) && event.target !== navBtn) {
-				closeMenu();
+		document.addEventListener('click', (e) => {
+			if (!navMenu?.contains(e.target) && e.target !== navBtn) {
+				if (navMenu.classList.contains('nav--active')) {
+					closeMenu();
+					e.stopPropagation();
+				}
 			}
 		});
 
@@ -383,31 +376,31 @@ document.addEventListener('DOMContentLoaded', () => {
 		/* Testimonials data */
 		const testimonialsData = [
 			{
-				image: '../assests/images/testimonials/erik.webp',
+				image: 'assests/images/testimonials/erik.webp',
 				name: 'Erik Lamela',
 				review:
 					"I can't say enough about the exceptional service at Coffee Chino. The staff is incredibly friendly, knowledgeable, and passionate. They always go the extra mile to ensure I have a memorable experience. It's the kind of place that makes you feel like a valued customer.",
 			},
 			{
-				image: '../assests/images/testimonials/sarah.webp',
+				image: 'assests/images/testimonials/sarah.webp',
 				name: 'Sarah Marie',
 				review:
 					'The combination of delicious food and incredible coffee at Coffee Chino is unbeatable. From their mouth watering pastries to their expertly crafted lattes, every visit is a delightful experience. It has become my favourite spot to indulge in a moment of pure bliss.',
 			},
 			{
-				image: '../assests/images/testimonials/john.webp',
+				image: 'assests/images/testimonials/john.webp',
 				name: 'John Lee',
 				review:
 					"I'm a coffee enthusiast, and I must say, Coffee Chino has impressed me with their dedication to quality. The attention to detail in their brewing process and the rich, aromatic flavours of their coffee are unparalleled. It's a true haven for coffee lovers.",
 			},
 			{
-				image: '../assests/images/testimonials/emily.webp',
+				image: 'assests/images/testimonials/emily.webp',
 				name: 'Emily Walsh',
 				review:
 					'The coffee at Coffee Chino is truly exceptional. Every cup is a perfect balance of flavours, leaving me craving for more. The cosy atmosphere and friendly staff make it my go-to spot for a relaxing coffee break.',
 			},
 			{
-				image: '../assests/images/testimonials/mike.webp',
+				image: 'assests/images/testimonials/mike.webp',
 				name: 'Mike Doe',
 				review:
 					"The cosy ambience at Coffee Chino always makes me feel right at home. The warm lighting, comfortable seating, and welcoming staff create the perfect atmosphere to unwind and enjoy a great cup of coffee. It's my sanctuary in the bustling city.",
@@ -472,9 +465,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	{
 		/***** Variables *****/
 		const lightbox = document.querySelector('.lightbox');
-		const lightboxImageWrapper = document.querySelector(
-			'.lightbox__image-wrapper',
-		);
 		const lightboxImage = document.querySelector('.lightbox__image');
 		const lightboxImages = document.querySelectorAll('.gallery__image');
 		const totalImages = lightboxImages.length;
@@ -482,7 +472,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		const lightboxCloseBtn = document.querySelector('.lightbox__btn--close');
 		const lightboxBtnNext = document.querySelector('.lightbox__btn--next');
 		const lightboxBtnPrev = document.querySelector('.lightbox__btn--prev');
-		const bodyEl = document.body;
 
 		let currentImageIndex = 0;
 		lightBoxTotal.textContent = `0${totalImages}`;
@@ -495,6 +484,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			lightboxImage.src = lightboxImages[index].getAttribute('data-imagesrc');
 			lightboxImage.alt = lightboxImages[index].alt;
+			lightboxImage.srcset = `assests/images/gallery/lightbox/gallery-${
+				index + 1
+			}-large-460.webp 460w, 
+                        assests/images/gallery/lightbox/gallery-${
+													index + 1
+												}-large-820.webp 820w,
+                        assests/images/gallery/lightbox/gallery-${
+													index + 1
+												}-large.webp`;
 			lightboxCurrent.textContent = `0${index + 1}`;
 			currentImageIndex = index;
 
@@ -516,20 +514,21 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Show lightbox
 		const showLightbox = () => {
 			lightbox.classList.add('show');
-			bodyEl.classList.add('dis-scroll');
+			toggleScroll(true);
 		};
 
 		// Hide lightbox
 		const hideLightbox = () => {
 			lightbox.classList.remove('show');
-			bodyEl.classList.remove('dis-scroll');
+			toggleScroll(false);
 		};
 
 		/***** Event listeners *****/
 
 		// Open lightbox image on click gallery image
 		lightboxImages.forEach((image, index) => {
-			image.addEventListener('click', () => {
+			image.addEventListener('click', (e) => {
+				e.stopPropagation();
 				showLightbox();
 				currentImageIndex = index;
 				updateLightboxImage(currentImageIndex);
@@ -537,7 +536,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 
 		// Close lightbox on click close button
-		lightboxCloseBtn.addEventListener('click', hideLightbox);
+		lightboxCloseBtn.addEventListener('click', (e) => {
+			e.stopPropagation();
+			hideLightbox();
+		});
 
 		// Prev image on click prev button
 		lightboxBtnPrev.addEventListener('click', () => {
@@ -556,8 +558,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 
 		// Close lightbox when click outside of lightbox image
-		document.addEventListener('click', (event) => {
-			if (event.target === lightbox) {
+		document.addEventListener('click', (e) => {
+			if (e.target === lightbox) {
 				hideLightbox();
 			}
 		});
@@ -566,6 +568,83 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.addEventListener('keydown', (event) => {
 			if (event.key === 'Escape') {
 				hideLightbox();
+			}
+		});
+	}
+
+	/***** Form *****/
+	{
+		/***** Variables *****/
+		const submitBtn = document.querySelector('.btn__submit');
+		const form = document.querySelector('.contact__form');
+		const modal = document.querySelector('.modal');
+		const closeModalBtn = document.querySelector('.modal__close');
+
+		/***** Functions *****/
+
+		// Open modal
+		const showModal = () => {
+			modal.style.display = 'flex';
+			toggleScroll(true);
+		};
+
+		// Close modal
+		const closeModal = () => {
+			modal.style.display = 'none';
+			toggleScroll(false);
+		};
+
+		// Show spinner and disable submit button while form is sending
+		const showSpinnerAndDisableButton = (button) => {
+			const spinner = document.createElement('span');
+			spinner.className = 'spinner';
+			button.innerHTML = '';
+			button.appendChild(spinner);
+			button.setAttribute('disabled', true);
+		};
+
+		// Hide spinner and enable submit button when form has been send
+		const hideSpinnerAndEnableButton = (button, buttonText) => {
+			const spinner = document.querySelector('.spinner');
+			if (spinner) {
+				spinner.remove();
+			}
+			button.innerHTML = buttonText;
+			button.removeAttribute('disabled');
+		};
+
+		/***** Event listeners *****/
+
+		// Form submit
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			// Show spinner and disable button
+			const buttonText = submitBtn.innerHTML;
+			showSpinnerAndDisableButton(submitBtn);
+
+			await new Promise((resolve) => setTimeout(resolve, 3000));
+
+			// Reset form
+			// form.reset();
+
+			// Show modal
+			showModal();
+
+			// Hide spinner and enable button
+			hideSpinnerAndEnableButton(submitBtn, buttonText);
+		});
+
+		// Close modal on close modal button click
+		closeModalBtn.addEventListener('click', (e) => {
+			e.stopPropagation();
+			closeModal();
+		});
+
+		// Close modal when click outside of modal content
+		document.addEventListener('click', (e) => {
+			if (e.target === modal) {
+				closeModal();
 			}
 		});
 	}
