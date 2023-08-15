@@ -13,3 +13,15 @@ function toggleScroll(disableScroll) {
 		body.style.paddingRight = '0';
 	}
 }
+
+// Show and hide element
+function toggleElement(element) {
+	const show = element.classList.contains('show');
+	if (show) {
+		element.classList.remove('show');
+		toggleScroll(false);
+	} else {
+		element.classList.add('show');
+		toggleScroll(true);
+	}
+}

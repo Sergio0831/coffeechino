@@ -1,15 +1,21 @@
 <?php
 // phpmailer files
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 require 'phpmailer/PHPMailer.php';
 require 'phpmailer/SMTP.php';
 require 'phpmailer/Exception.php';
 
-$title = "Email subject";
+// Email formatting
+$body = "";
+$title = 'Email subject';
+$c = true;
 
-foreach ( $_POST as $key => $value ) {
-  if ( $value != "" && $key != "project_name" && $key != "admin_email" && $key != "form_subject" ) {
+foreach ($_POST as $key => $value) {
+  if ($value != "") {
     $body .= "
-    " . ( ($c = !$c) ? '<tr>':'<tr style="background-color: #f8f8f8;">' ) . "
+    " . (($c = !$c) ? '<tr>' : '<tr style="background-color: #f8f8f8;">') . "
       <td style='padding: 10px; border: #e9e9e9 1px solid;'><b>$key</b></td>
       <td style='padding: 10px; border: #e9e9e9 1px solid;'>$value</td>
     </tr>
@@ -19,7 +25,8 @@ foreach ( $_POST as $key => $value ) {
 
 $body = "<table style='width: 100%;'>$body</table>";
 
-$mail = new PHPMailer\PHPMailer\PHPMailer();
+// PHPMailer settings
+$mail = new PHPMailer(true);
 
 try {
   $mail->isSMTP();
@@ -27,14 +34,13 @@ try {
   $mail->SMTPAuth   = true;
 
   // Email settings
-  $mail->Host       = 'smtp.gmail.com'; 
+  $mail->Host       = 'smtp.gmail.com';
   $mail->Username   = 'sergejs.ivcenko@gmail.com';
-  $mail->Password   = 'mnleqwaoglmawtpa'; 
+  $mail->Password   = 'mnleqwaoglmawtpa';
   $mail->SMTPSecure = 'ssl';
   $mail->Port       = 465;
 
-  $mail->setFrom('sergejs.ivcenko@gmail.com', 'Message from Coffee Chino website'); 
-
+  $mail->setFrom('sergejs.ivcenko@gmail.com', 'Message form Coffee Chino website');
   $mail->addAddress('sergejs.ivcenko@gmail.com');
 
   $mail->isHTML(true);
@@ -42,7 +48,8 @@ try {
   $mail->Body = $body;
 
   $mail->send();
-
+  echo 'Email has been sent';
 } catch (Exception $e) {
-  $status = "The message was not send. Error: {$mail->ErrorInfo}";
+  $status = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+  echo "{$status}";
 }

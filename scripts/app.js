@@ -511,25 +511,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		};
 
-		// Show lightbox
-		const showLightbox = () => {
-			lightbox.classList.add('show');
-			toggleScroll(true);
-		};
-
-		// Hide lightbox
-		const hideLightbox = () => {
-			lightbox.classList.remove('show');
-			toggleScroll(false);
-		};
-
 		/***** Event listeners *****/
 
 		// Open lightbox image on click gallery image
 		lightboxImages.forEach((image, index) => {
 			image.addEventListener('click', (e) => {
 				e.stopPropagation();
-				showLightbox();
+				toggleElement(lightbox);
 				currentImageIndex = index;
 				updateLightboxImage(currentImageIndex);
 			});
@@ -538,7 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Close lightbox on click close button
 		lightboxCloseBtn.addEventListener('click', (e) => {
 			e.stopPropagation();
-			hideLightbox();
+			toggleElement(lightbox);
 		});
 
 		// Prev image on click prev button
@@ -560,14 +548,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Close lightbox when click outside of lightbox image
 		document.addEventListener('click', (e) => {
 			if (e.target === lightbox) {
-				hideLightbox();
+				toggleElement(lightbox);
 			}
 		});
 
 		// Close the lightbox when the "Escape" key is pressed
 		document.addEventListener('keydown', (event) => {
 			if (event.key === 'Escape') {
-				hideLightbox();
+				toggleElement(lightbox);
 			}
 		});
 	}
@@ -578,21 +566,23 @@ document.addEventListener('DOMContentLoaded', () => {
 		const submitBtn = document.querySelector('.btn__submit');
 		const form = document.querySelector('.contact__form');
 		const modal = document.querySelector('.modal');
-		const closeModalBtn = document.querySelector('.modal__close');
+		const closeBtn = document.querySelector('.modal__close');
+
+		// The modal content template
+		const modalMessageTemplate = (status, errorMessage) => `
+        		<h4 class="heading-4">${
+							status === 'success'
+								? 'Thank you for getting in touch with us!'
+								: 'An Error Occurred'
+						}</h4>
+        		<p>${
+							status === 'success'
+								? 'Your message has been received, and we will get back to you as soon as possible.'
+								: errorMessage
+						}</p>
+				`;
 
 		/***** Functions *****/
-
-		// Open modal
-		const showModal = () => {
-			modal.style.display = 'flex';
-			toggleScroll(true);
-		};
-
-		// Close modal
-		const closeModal = () => {
-			modal.style.display = 'none';
-			toggleScroll(false);
-		};
 
 		// Show spinner and disable submit button while form is sending
 		const showSpinnerAndDisableButton = (button) => {
@@ -613,38 +603,74 @@ document.addEventListener('DOMContentLoaded', () => {
 			button.removeAttribute('disabled');
 		};
 
-		/***** Event listeners *****/
-
 		// Form submit
-		form.addEventListener('submit', async (e) => {
+		const formSubmit = async (e) => {
 			e.preventDefault();
 
+			// Get data from forms input
+			const formData = new FormData(form);
 			// Show spinner and disable button
 			const buttonText = submitBtn.innerHTML;
 			showSpinnerAndDisableButton(submitBtn);
 
-			await new Promise((resolve) => setTimeout(resolve, 3000));
+			try {
+				const response = await fetch('mail.php', {
+					method: 'POST',
+					body: formData,
+				});
 
-			// Reset form
-			// form.reset();
+				const modalMessage = document.querySelector('.modal__message');
 
-			// Show modal
-			showModal();
+				if (response.status === 200) {
+					modalMessage.innerHTML = modalMessage.innerHTML =
+						modalMessageTemplate('success');
+					console.log(response.status, response);
+					// Reset form
+					form.reset();
+				} else {
+					modalMessage.innerHTML = modalMessageTemplate(
+						'error',
+						'An error occurred while sending the email. Please try later.',
+					);
+					// const responseText = await response.text();
+					// console.log(responseText);
+					console.log(response.status, response);
+				}
 
-			// Hide spinner and enable button
-			hideSpinnerAndEnableButton(submitBtn, buttonText);
-		});
+				// Show modal
+				toggleElement(modal);
+
+				// Hide spinner and enable button
+				hideSpinnerAndEnableButton(submitBtn, buttonText);
+			} catch (error) {
+				console.log(error);
+				const modalMessage = document.querySelector('.modal__message');
+				modalMessage.innerHTML = modalMessageTemplate(
+					'error',
+					'An error occurred while sending the email. Please try later.',
+				);
+				hideSpinnerAndEnableButton(submitBtn, buttonText);
+				toggleElement(modal);
+			}
+
+			// await new Promise((resolve) => setTimeout(resolve, 2000));
+		};
+
+		/***** Event listeners *****/
+
+		// Form submit
+		form.addEventListener('submit', formSubmit);
 
 		// Close modal on close modal button click
-		closeModalBtn.addEventListener('click', (e) => {
+		closeBtn.addEventListener('click', (e) => {
 			e.stopPropagation();
-			closeModal();
+			toggleElement(modal);
 		});
 
 		// Close modal when click outside of modal content
 		document.addEventListener('click', (e) => {
 			if (e.target === modal) {
-				closeModal();
+				toggleElement(modal);
 			}
 		});
 	}

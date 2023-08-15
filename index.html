@@ -272,13 +272,13 @@
                         share your experience with
                         us, please don't hesitate to send us a message.</p>
                     <!-- Contact Us contact form start -->
-                    <form action="" method="POST" class="contact__form">
-                        <input type="text" aria-label="Name" placeholder="Enter your name" class="contact__form-input"
-                            required>
-                        <input type="email" aria-label="email" placeholder="Enter your email"
+                    <form action="#" class="contact__form">
+                        <input type="text" aria-label="Name" name="name" placeholder="Enter your name"
                             class="contact__form-input" required>
-                        <textarea aria-label="Message" cols="30" rows="10" placeholder="Enter your message"
-                            class="contact__form-input" required></textarea>
+                        <input type="email" name="email" aria-label="email" placeholder="Enter your email"
+                            class="contact__form-input" required>
+                        <textarea aria-label="Message" name="message" cols="30" rows="10"
+                            placeholder="Enter your message" class="contact__form-input" required></textarea>
                         <button type="submit" class="btn__submit btn btn__block btn__outline btn__outline--dark">Send a
                             message</button>
                     </form>
@@ -293,8 +293,10 @@
                                     d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
                             </svg>
                         </button>
-                        <h4 class="heading-4">Thank you for getting in touch with us!</h4>
-                        <p>Your message has been received, and we will get back to you as soon as possible.</p>
+                        <div class="modal__message">
+                            <!-- <h4 class="heading-4">Thank you for getting in touch with us!</h4>
+                                                    <p>Your message has been received, and we will get back to you as soon as possible.</p> -->
+                        </div>
                     </div>
                 </div>
                 <!-- Form Modal start -->
