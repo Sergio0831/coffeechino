@@ -6,6 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'phpmailer/PHPMailer.php';
 require 'phpmailer/SMTP.php';
 require 'phpmailer/Exception.php';
+require 'config.php';
 
 // Email formatting
 $body = "";
@@ -34,9 +35,9 @@ try {
   $mail->SMTPAuth   = true;
 
   // Email settings
-  $mail->Host       = 'smtp.gmail.com';
-  $mail->Username   = 'sergejs.ivcenko@gmail.com';
-  $mail->Password   = 'mnleqwaoglmawtpa';
+  $mail->Host       = SMTP_HOST;
+  $mail->Username   = SMTP_USERNAME;
+  $mail->Password   = SMTP_PASSWORD;
   $mail->SMTPSecure = 'ssl';
   $mail->Port       = 465;
 

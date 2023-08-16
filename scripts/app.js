@@ -573,7 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
         		<h4 class="heading-4">${
 							status === 'success'
 								? 'Thank you for getting in touch with us!'
-								: 'An Error Occurred'
+								: 'Something went wrong'
 						}</h4>
         		<p>${
 							status === 'success'
@@ -617,6 +617,14 @@ document.addEventListener('DOMContentLoaded', () => {
 				const response = await fetch('mail.php', {
 					method: 'POST',
 					body: formData,
+					mode: 'same-origin', // no-cors, *cors, same-origin
+					cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+					credentials: 'same-origin', // include, *same-origin, omit
+					headers: {
+						'Content-Type': 'application/json',
+						// 'Content-Type': 'application/x-www-form-urlencoded',
+					},
+					referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 				});
 
 				const modalMessage = document.querySelector('.modal__message');
@@ -630,7 +638,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				} else {
 					modalMessage.innerHTML = modalMessageTemplate(
 						'error',
-						'An error occurred while sending the email. Please try later.',
+						'The message was not sent. Please try again',
 					);
 					// const responseText = await response.text();
 					// console.log(responseText);
@@ -647,7 +655,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				const modalMessage = document.querySelector('.modal__message');
 				modalMessage.innerHTML = modalMessageTemplate(
 					'error',
-					'An error occurred while sending the email. Please try later.',
+					'The message was not sent. Please try again.',
 				);
 				hideSpinnerAndEnableButton(submitBtn, buttonText);
 				toggleElement(modal);
