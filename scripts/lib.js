@@ -25,3 +25,8 @@ function toggleElement(element) {
 		toggleScroll(true);
 	}
 }
+
+// Add click event listener to element
+function addClickEventListener(element, callback) {
+	element.addEventListener('click', callback);
+}

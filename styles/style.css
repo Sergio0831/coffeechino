@@ -304,9 +304,10 @@ h2 {
 
 /* Video styles */
 .hero {
-	display: flex;
+	display: grid;
 	align-items: center;
-	height: 100vh;
+	min-height: 100vh;
+	height: auto;
 }
 
 .hero__video {
@@ -615,6 +616,10 @@ h2 {
 	transition: background-color var(--transition-base);
 }
 
+.lightbox__btn--close svg {
+	height: 1.5rem;
+}
+
 .lightbox__btn:disabled {
 	opacity: 0.3;
 }
@@ -794,6 +799,10 @@ h2 {
 	right: 0.8rem;
 }
 
+.modal__close svg {
+	height: 1.5rem;
+}
+
 .contact__map {
 	width: 100%;
 	border: none;
@@ -890,7 +899,10 @@ h2 {
 	outline: none;
 	opacity: 0;
 	transform: scale(0.6);
-	transition: opacity var(--transition-base), transform var(--transition-base);
+	visibility: hidden;
+	transition: opacity var(--transition-base), transform var(--transition-base),
+		visibility var(--transition-base);
+	z-index: 3;
 	pointer-events: none;
 }
 
@@ -898,7 +910,7 @@ h2 {
 	transform: scale(1);
 	opacity: 0.7;
 	pointer-events: visible;
-	z-index: 3;
+	visibility: visible;
 }
 
 .top-btn:hover,
@@ -953,6 +965,9 @@ h2 {
 			'../assests/images/menu/menu-bg-960.avif' type('image/avif'),
 			'../assests/images/menu/menu-bg-960.webp' type('image/webp')
 		);
+		background-position: center;
+		background-attachment: fixed;
+		background-size: cover;
 	}
 
 	.menu__wrapper {
@@ -1209,8 +1224,5 @@ h2 {
 			'../assests/images/menu/menu-bg.avif' type('image/avif'),
 			'../assests/images/menu/menu-bg.webp' type('image/webp')
 		);
-		background-position: center;
-		background-attachment: fixed;
-		background-size: cover;
 	}
 }

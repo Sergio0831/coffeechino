@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Update the active navigation menu link on scro20
 		const handleScroll = () => {
-			const sections = document.querySelectorAll('section, .hero');
+			const sections = document.querySelectorAll('section');
 			const scrollPosition = window.scrollY;
 
 			let activeLink = null;
@@ -109,13 +109,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		/***** Event Listeners *****/
 
 		// Event listener to open, close menu
-		navBtn?.addEventListener('click', (event) => {
-			event.stopPropagation();
+		addClickEventListener(navBtn, (e) => {
+			e.stopPropagation();
 			toggleMenu();
 		});
 
 		// Event listener to close the menu when clicked outside
-		document.addEventListener('click', (e) => {
+		addClickEventListener(document, (e) => {
 			if (!navMenu?.contains(e.target) && e.target !== navBtn) {
 				if (navMenu.classList.contains('nav--active')) {
 					closeMenu();
@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Event listener to scroll to section and close the menu when menu link is clicked
 		navLinks?.forEach((link) => {
-			link.addEventListener('click', (event) => {
+			addClickEventListener(link, (event) => {
 				event.stopPropagation();
 				closeMenu();
 				scrolToElementOnClick(event, link, 50);
@@ -137,10 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Event listener to scroll to particular section on button clicked
 		scrollBtns?.forEach((btn) => {
-			btn.addEventListener('click', (event) => {
-				event.stopPropagation();
+			addClickEventListener(btn, (e) => {
+				e.stopPropagation();
 				btn.blur();
-				scrolToElementOnClick(event, btn, 50);
+				scrolToElementOnClick(e, btn, 50);
 			});
 		});
 
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 
 		// Event listener to scroll back to top when back to top button is clicked
-		backToTopBtn.addEventListener('click', scrollToTop);
+		addClickEventListener(backToTopBtn, scrollToTop);
 	}
 
 	/***** Drinks and food menu *****/
@@ -365,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		};
 
 		/***** Event listeners *****/
-		menuBtns.forEach((btn) => btn.addEventListener('click', showMenuOnClick));
+		menuBtns.forEach((btn) => addClickEventListener(btn, showMenuOnClick));
 	}
 
 	/***** Testimonials *****/
@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		// Open lightbox image on click gallery image
 		lightboxImages.forEach((image, index) => {
-			image.addEventListener('click', (e) => {
+			addClickEventListener(image, (e) => {
 				e.stopPropagation();
 				toggleElement(lightbox);
 				currentImageIndex = index;
@@ -524,13 +524,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 
 		// Close lightbox on click close button
-		lightboxCloseBtn.addEventListener('click', (e) => {
+		addClickEventListener(lightboxCloseBtn, (e) => {
 			e.stopPropagation();
 			toggleElement(lightbox);
 		});
 
 		// Prev image on click prev button
-		lightboxBtnPrev.addEventListener('click', () => {
+		addClickEventListener(lightboxBtnPrev, () => {
 			if (currentImageIndex > 0) {
 				currentImageIndex--;
 				updateLightboxImage(currentImageIndex);
@@ -538,7 +538,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 
 		// Next image on click next button
-		lightboxBtnNext.addEventListener('click', () => {
+		addClickEventListener(lightboxBtnNext, () => {
 			if (currentImageIndex < totalImages - 1) {
 				currentImageIndex++;
 				updateLightboxImage(currentImageIndex);
@@ -546,7 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 
 		// Close lightbox when click outside of lightbox image
-		document.addEventListener('click', (e) => {
+		addClickEventListener(document, (e) => {
 			if (e.target === lightbox) {
 				toggleElement(lightbox);
 			}
@@ -568,18 +568,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		const modal = document.querySelector('.modal');
 		const closeBtn = document.querySelector('.modal__close');
 
-		// The modal content template
-		const modalMessageTemplate = (status, errorMessage) => `
+		// The modal content message template
+		const modalMessageTemplate = (status, message) => `
         		<h4 class="heading-4">${
 							status === 'success'
 								? 'Thank you for getting in touch with us!'
 								: 'Something went wrong'
 						}</h4>
-        		<p>${
-							status === 'success'
-								? 'Your message has been received, and we will get back to you as soon as possible.'
-								: errorMessage
-						}</p>
+        		<p>${message}</p>
 				`;
 
 		/***** Functions *****/
@@ -606,7 +602,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Form submit
 		const formSubmit = async (e) => {
 			e.preventDefault();
-
 			// Get data from forms input
 			const formData = new FormData(form);
 			// Show spinner and disable button
@@ -617,33 +612,15 @@ document.addEventListener('DOMContentLoaded', () => {
 				const response = await fetch('mail.php', {
 					method: 'POST',
 					body: formData,
-					mode: 'same-origin', // no-cors, *cors, same-origin
-					cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-					credentials: 'same-origin', // include, *same-origin, omit
-					headers: {
-						'Content-Type': 'application/json',
-						// 'Content-Type': 'application/x-www-form-urlencoded',
-					},
-					referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
 				});
 
+				const data = await response.json();
 				const modalMessage = document.querySelector('.modal__message');
 
-				if (response.status === 200) {
-					modalMessage.innerHTML = modalMessage.innerHTML =
-						modalMessageTemplate('success');
-					console.log(response.status, response);
-					// Reset form
-					form.reset();
-				} else {
-					modalMessage.innerHTML = modalMessageTemplate(
-						'error',
-						'The message was not sent. Please try again',
-					);
-					// const responseText = await response.text();
-					// console.log(responseText);
-					console.log(response.status, response);
-				}
+				modalMessage.innerHTML = modalMessageTemplate(
+					data.status,
+					data.message,
+				);
 
 				// Show modal
 				toggleElement(modal);
@@ -651,17 +628,18 @@ document.addEventListener('DOMContentLoaded', () => {
 				// Hide spinner and enable button
 				hideSpinnerAndEnableButton(submitBtn, buttonText);
 			} catch (error) {
-				console.log(error);
 				const modalMessage = document.querySelector('.modal__message');
 				modalMessage.innerHTML = modalMessageTemplate(
 					'error',
+					'An error occurred while sending the email. Please try later.',
 					'The message was not sent. Please try again.',
 				);
 				hideSpinnerAndEnableButton(submitBtn, buttonText);
 				toggleElement(modal);
 			}
 
-			// await new Promise((resolve) => setTimeout(resolve, 2000));
+			// Reset form
+			form.reset();
 		};
 
 		/***** Event listeners *****/
@@ -670,13 +648,13 @@ document.addEventListener('DOMContentLoaded', () => {
 		form.addEventListener('submit', formSubmit);
 
 		// Close modal on close modal button click
-		closeBtn.addEventListener('click', (e) => {
+		addClickEventListener(closeBtn, (e) => {
 			e.stopPropagation();
 			toggleElement(modal);
 		});
 
 		// Close modal when click outside of modal content
-		document.addEventListener('click', (e) => {
+		addClickEventListener(document, (e) => {
 			if (e.target === modal) {
 				toggleElement(modal);
 			}
