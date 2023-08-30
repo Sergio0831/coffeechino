@@ -126,7 +126,7 @@ h2 {
 }
 
 .heading-1 {
-	font-size: clamp(2.25rem, 5vw + 1rem, 3.25rem);
+	font-size: clamp(2rem, 5vw + 1rem, 3.25rem);
 	color: var(--light-color);
 }
 
@@ -293,6 +293,8 @@ h2 {
 	right: 0;
 	background-color: transparent;
 	border-bottom: 1px solid var(--accent-color);
+	z-index: 10;
+	transition: all var(--transition-base);
 }
 
 .header__nav {
@@ -320,9 +322,47 @@ h2 {
 }
 
 /* Text on video top styles */
-.hero__content h1 {
+.hero__content-heading {
 	max-width: 30.375rem;
 	margin-bottom: 1.875rem;
+}
+
+.hero__content-heading span {
+	display: block;
+	transform-origin: center bottom;
+	will-change: transform;
+	transform: translateY(20%);
+	opacity: 0;
+	animation: slideIn 2s forwards;
+}
+
+.hero__content-heading span:first-child {
+	animation-delay: 0.2s;
+}
+
+.hero__content-heading span:nth-child(2) {
+	animation-delay: 0.4s;
+}
+
+.hero__content-heading span:nth-child(3) {
+	animation-delay: 0.7s;
+}
+
+.hero__content-heading span:nth-child(4) {
+	animation-delay: 1s;
+}
+
+.hero__content a {
+	opacity: 0;
+	animation: slideIn 2s forwards;
+	animation-delay: 1.5s;
+}
+
+@keyframes slideIn {
+	to {
+		opacity: 1;
+		transform: translateY(0%);
+	}
 }
 
 /* Main navigation styles */
@@ -340,6 +380,7 @@ h2 {
 	transition: transform 0.5s, opacity 0.5s;
 	border-bottom-left-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;
+	z-index: 3;
 }
 
 .nav.nav--active {
@@ -842,6 +883,10 @@ h2 {
 	text-decoration: underline;
 }
 
+.footer__contact a {
+	padding: 0.5rem 0 0;
+}
+
 .social {
 	margin-top: 0.75rem;
 }
@@ -858,6 +903,8 @@ h2 {
 .social__link {
 	padding: 0.75rem;
 	display: flex;
+	align-items: center;
+	justify-content: center;
 	border: solid 1px var(--light-color);
 	border-radius: var(--radius-small);
 	transition: border-color var(--transition-base);
@@ -932,8 +979,8 @@ h2 {
 
 	/* Header styles */
 	.header {
-		margin: 0 auto;
 		width: min(75rem, calc(100% - 3.75rem));
+		margin: 0 auto;
 	}
 
 	.header__nav {
@@ -1177,6 +1224,11 @@ h2 {
 
 	.contact__map {
 		height: 100%;
+	}
+
+	/* Footer links style */
+	.footer__contact a {
+		padding: 0;
 	}
 }
 

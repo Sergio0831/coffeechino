@@ -4,9 +4,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require 'phpmailer/PHPMailer.php';
-// require 'phpmailer/SMTP.php';
+require 'phpmailer/SMTP.php';
 require 'phpmailer/Exception.php';
-// require 'config.php';
+require 'config.php';
 
 // Email formatting
 $body = "";
@@ -43,7 +43,6 @@ try {
   // $mail->Port       = 465;
 
   $mail->setFrom('coffeechino@' . $_SERVER['HTTP_HOST'], 'Coffee Chino');
-  $mail->addAddress('sergejs.ivcenko@gmail.com');
   $mail->addAddress('sergejs.ivcenko@inbox.lv');
   $mail->addAddress('23sergejsivcenko@finglastc.ie');
   $mail->addAddress('coffeechino@sergejs-ivcenko.com');

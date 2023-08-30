@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			let activeLink = null;
 
 			sections.forEach((section) => {
-				const sectionTop = section.offsetTop;
+				const sectionTop = section.offsetTop - 100;
 				const sectionBottom = sectionTop + section.offsetHeight;
 
 				if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
@@ -624,9 +624,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 				// Show modal
 				toggleElement(modal);
-
-				// Hide spinner and enable button
-				hideSpinnerAndEnableButton(submitBtn, buttonText);
 			} catch (error) {
 				const modalMessage = document.querySelector('.modal__message');
 				modalMessage.innerHTML = modalMessageTemplate(
@@ -634,8 +631,10 @@ document.addEventListener('DOMContentLoaded', () => {
 					'An error occurred while sending the email. Please try later.',
 					'The message was not sent. Please try again.',
 				);
-				hideSpinnerAndEnableButton(submitBtn, buttonText);
 				toggleElement(modal);
+			} finally {
+				// Hide spinner and enable button
+				hideSpinnerAndEnableButton(submitBtn, buttonText);
 			}
 
 			// Reset form

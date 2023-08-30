@@ -2,9 +2,13 @@
 
 ## ![Coffee Chino Logo](./assests/images/logo.svg)
 
+### Screenshot
+
+![Screenshot](./assests/images/screenshot.jpg)
+
 ### Links
 
-- Coming Soon! []()
+- Live Site! [Demo](https://sergejs-ivcenko.com/coffeechino)
 
 ## My process
 
